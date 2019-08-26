@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.phone_app.UI.ViewModelFactory.ProfileViewModelFactory
+import com.example.phone_app.UI.ViewModels.HomeViewModel
 import com.example.phone_app.UI.ViewModels.ProfileViewModel
 import kotlinx.android.synthetic.main.profile_fragment.*
 import org.kodein.di.KodeinAware
@@ -46,8 +47,8 @@ class Profile : Fragment(),KodeinAware {
                 }
             }
     }
-    var strtext: String = ""
-    private lateinit var viewModel: ProfileViewModel
+
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,62 +60,14 @@ class Profile : Fragment(),KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(ProfileViewModel::class.java)
+        viewModel = ViewModelProviders.of(this,viewModelFactory).get(HomeViewModel::class.java)
         // TODO: Use the ViewModel
-        UserName.text=com.example.phone_app.Data.Person.email
-         viewModel.getUsers().observe(this, Observer {
-             UserName.text = it.toString()
-         })
-        editPhoto.setOnClickListener {
-            //check runtime permission
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                if (ContextCompat.checkSelfPermission(context!!,Manifest.permission.READ_EXTERNAL_STORAGE) ==
-                    PackageManager.PERMISSION_DENIED){
-                    //permission denied
-                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-                    //show popup to request runtime permission
-                    requestPermissions(permissions, PERMISSION_CODE)
-                }
-                else{
-                    //permission already granted
-                    pickImageFromGallery()
-                }
-            }
-            else{
-                //system OS is < Marshmallow
-                pickImageFromGallery()
-            }
+
+
+
         }
-        }
-    private fun pickImageFromGallery() {
-        //Intent to pick image
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_PICK_CODE)
+
     }
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode){
-            PERMISSION_CODE -> {
-                if (grantResults.size >0 && grantResults[0] ==
-                    PackageManager.PERMISSION_GRANTED){
-                    //permission from popup granted
-                    pickImageFromGallery()
-                }
-                else{
-                    //permission from popup denied
-                    Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            imageView2.setImageURI(data?.data)
-            imageView2.layoutParams.height = 400
-            imageView2.layoutParams.width = 450
-            imageView2.requestLayout()
-        }
-    }
-    }
+
 
 
