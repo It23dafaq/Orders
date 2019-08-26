@@ -28,9 +28,9 @@ class HomeViewModel(private val homeController: HomeController) : ScopedViewMode
     fun GetSize():Int{
         return  addcart.size
     }
-    fun getUsers(){
+    fun getUsers(string: String){
         launchWithLoad({
-            homeController.getUsers()
+            homeController.getUsers(string)
         }){}
     }
 

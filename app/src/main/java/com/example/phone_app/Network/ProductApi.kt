@@ -7,13 +7,27 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+//https://rectifiable-merchan.000webhostapp.com/ShowGin.php
 
-const val BASE_URL = "https://rectifiable-merchan.000webhostapp.com/e_com/"
+//const val BASE_URL = "https://rectifiable-merchan.000webhostapp.com/e_com/"
+const val BASE_URL = "https://rectifiable-merchan.000webhostapp.com/"
 
 interface ProductApi {
 
     @GET("present_json_array.php")
     fun getProducts() : Deferred <List<Products>>
+
+    @GET("ShowVodka.php")
+    fun getVodka() : Deferred <List<Products>>
+
+    @GET("ShowGin.php")
+    fun getGin() : Deferred <List<Products>>
+
+    @GET("ShowRum.php")
+    fun getRum() : Deferred <List<Products>>
+
+    @GET("ShowTequila.php")
+    fun getTequila() : Deferred <List<Products>>
 
     companion object {
         operator fun invoke(

@@ -2,12 +2,18 @@ package com.example.phone_app
 
 
 
+import android.app.Application
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 
 
@@ -27,9 +33,11 @@ import org.kodein.di.KodeinAware
 
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-
+private var Position:Int=0
 
 class Home : BaseFragment(),KodeinAware {
     override fun layoutIname(): String {
@@ -37,20 +45,20 @@ class Home : BaseFragment(),KodeinAware {
     }
 
 
-    var cachedList:MutableList<Products> = ArrayList()
+    var cachedList: MutableList<Products> = ArrayList()
 
 
     override val kodein by closestKodein()
 
-        /* activity specific bindings */
-        private val viewModelFactory: HomeViewModelFactory by instance()
-
+    /* activity specific bindings */
+    private val viewModelFactory: HomeViewModelFactory by instance()
+    private var drinkSelected: String = ""
 
 
 
     companion object {
 
-         var shop:MutableList<Products> = ArrayList()
+        var shop: MutableList<Products> = ArrayList()
 
         @JvmStatic
         fun newInstance() =
@@ -58,13 +66,13 @@ class Home : BaseFragment(),KodeinAware {
                 arguments = Bundle().apply {
 
 
-                 }
+                }
 
             }
     }
 
     private lateinit var viewModel: HomeViewModel
-//    private val cachedList: LiveData<List<Products>> = List<Products>()
+    //    private val cachedList: LiveData<List<Products>> = List<Products>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -74,16 +82,19 @@ class Home : BaseFragment(),KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(HomeViewModel::class.java)
-        viewModel.getUsers()
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
+       // viewModel.getUsers(drinkSelected)
 
         val apiServic = ProductApi(ConnectivityInterceptorImpl(this.context!!))
         val productNetworkDataSource = ProductNetworkDataSourceImpl(apiServic)
         viewModel.products.observe(this, Observer {
 
-            val adapter = ProductAdapter(it){
-                    position ->viewModel.addProduct(position)
-            }
+            val adapter = ProductAdapter(it, { position ->
+                viewModel.addProduct(position)
+
+
+            },this.context!!)
+
             recyclerproducts.adapter = adapter
             recyclerproducts.layoutManager = LinearLayoutManager(this.context)
 
@@ -91,8 +102,26 @@ class Home : BaseFragment(),KodeinAware {
             //  textView4.text=it.toString()
             //cachedList.addAll(listOf(it))
         })
-        var dad: String = ""
-        /*
+
+        val drinksNames = arrayOf("Vodka", "Rum", "Gin", "Tequila")
+        val drinksSpinnerAdapter =
+            ArrayAdapter(this.context!!, R.layout.support_simple_spinner_dropdown_item, drinksNames)
+        drinksSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1)
+        spinner.adapter = drinksSpinnerAdapter
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                spinner.setSelection(Position).toString()
+                viewModel.getUsers(drinkSelected)
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+
+             drinkSelected =  parent.getItemAtPosition(position).toString()
+                Position=position
+                viewModel.getUsers(drinkSelected)
+            }
+            /*
           productNetworkDataSource.downloadProduct.observe(this, Observer {
 
               //textView4.text= it.toString()
@@ -114,14 +143,16 @@ class Home : BaseFragment(),KodeinAware {
   */
 
 
-        //   GlobalScope.launch(Dispatchers.Main) {
-        //       productNetworkDataSource.fetchCurrentWeather()
-        //   }
+            //   GlobalScope.launch(Dispatchers.Main) {
+            //       productNetworkDataSource.fetchCurrentWeather()
+            //   }
 
+
+        }
 
     }
 
-    }
+}
 
 
 

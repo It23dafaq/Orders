@@ -15,17 +15,13 @@ data class Products(
 
 
 
-    @SerializedName("id")
-    @PrimaryKey(autoGenerate = false)
-    val id: Int,
-    @SerializedName("name")
-    val name: String,
-    @SerializedName("price")
+    @SerializedName("Drink")
+    var name: String,
+    @SerializedName("Price")
     val price: Double,
-    @SerializedName("Picture")
-    val picture: String,
-    @SerializedName("description")
-    val description: String
+    @SerializedName("cuantity")
+    var quantity: String
+
 
 )
 
