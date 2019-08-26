@@ -9,17 +9,12 @@ import com.example.phone_app.UI.Controllers.ProfileController
 
 class ProfileViewModel(private val profileController: ProfileController) : ScopedViewModel(){
     // TODO: Implement the ViewModel
-    private val users: MutableLiveData<Person>  by lazy {
-        MutableLiveData<Person>().also {
-            loadUsers()
 
-        }
+    var products = profileController.downloadTable
+
+    fun getUsers(){
+        launchWithLoad({
+            profileController.getTables()
+        }){}
     }
-
-    fun getUsers(): LiveData<Person> {
-        return users
-    }
-
-    private fun loadUsers() {
-       }
 }

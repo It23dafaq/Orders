@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.phone_app.Network.ConnectivityInterceptor
 import com.example.phone_app.Network.ConnectivityInterceptorImpl
 import com.example.phone_app.Network.ProductApi
+import com.example.phone_app.Network.TablesApi
 import com.example.phone_app.UI.Controllers.*
 import com.example.phone_app.UI.ViewModelFactory.HomeViewModelFactory
 import com.example.phone_app.UI.ViewModelFactory.ProfileViewModelFactory
@@ -24,6 +25,7 @@ class PhoneApplication:Application(), KodeinAware {
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         //Service
         bind() from singleton { ProductApi(instance()) }
+        bind() from singleton { TablesApi (instance()) }
         //controller
         bind<HomeController>() with singleton {
             HomeControllerIml(

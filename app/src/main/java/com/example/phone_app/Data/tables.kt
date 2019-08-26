@@ -5,11 +5,13 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "tables")
 data class tables (
 
-        @SerializedName("TableID")
+        @SerializedName("ID")
         var ID: Int,
+        @SerializedName("Name")
+        val Name: Double,
         @SerializedName("TotalPrice")
         val price: Double,
-        @SerializedName("quantity")
+        @SerializedName("Quantity")
         var quantity: String,
         @SerializedName("isOkay")
         var isOkay: Boolean

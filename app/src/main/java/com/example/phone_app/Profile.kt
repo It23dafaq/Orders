@@ -1,27 +1,23 @@
 package com.example.phone_app
 
 
-import android.Manifest
-import android.app.Activity
-import android.app.Person
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.phone_app.Network.ConnectivityInterceptorImpl
+import com.example.phone_app.Network.TablesApi
+import com.example.phone_app.UI.Adapters.TableAdapter
 import com.example.phone_app.UI.ViewModelFactory.ProfileViewModelFactory
-import com.example.phone_app.UI.ViewModels.HomeViewModel
 import com.example.phone_app.UI.ViewModels.ProfileViewModel
+import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -35,10 +31,7 @@ class Profile : Fragment(),KodeinAware {
     /* activity specific bindings */
     private val viewModelFactory: ProfileViewModelFactory by instance()
     companion object {
-        //image pick code
-        private val IMAGE_PICK_CODE = 1000;
-        //Permission code
-        private val PERMISSION_CODE = 1001;
+
         @JvmStatic
         fun newInstance() =
             Profile().apply {
@@ -48,7 +41,7 @@ class Profile : Fragment(),KodeinAware {
             }
     }
 
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,8 +53,19 @@ class Profile : Fragment(),KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(HomeViewModel::class.java)
+        viewModel = ViewModelProviders.of(this,viewModelFactory).get(ProfileViewModel::class.java)
         // TODO: Use the ViewModel
+        viewModel.getUsers()
+        val apiServic = TablesApi(ConnectivityInterceptorImpl(this.context!!))
+       // val productNetworkDataSource = ProductNetworkDataSourceImpl(apiServic)
+        viewModel.products.observe(this, Observer {
+
+            val adapter = TableAdapter(it)
+
+            tableRecyclerView.adapter = adapter
+            tableRecyclerView.layoutManager = LinearLayoutManager(this.context)
+            })
+
 
 
 

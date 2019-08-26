@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.phone_app.Data.Products
+import com.example.phone_app.Data.tables
 import com.example.phone_app.R
-import kotlinx.android.synthetic.main.fragment_cart_view.view.*
 import kotlinx.android.synthetic.main.table_layout.view.*
 private var boolean : Boolean=true
-class TableAdapter(val phones: List<Products>, val clickListener: (Int) -> Unit): RecyclerView.Adapter<TableAdapter.CartViewHolder>() {
+class TableAdapter(val phones: List<tables>): RecyclerView.Adapter<TableAdapter.CartViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -19,12 +18,12 @@ class TableAdapter(val phones: List<Products>, val clickListener: (Int) -> Unit)
         )
     }
 
-    override fun getItemCount() = 35
+    override fun getItemCount() = phones.size
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val movie = phones[position]
         //  holder.view.id = movie.id
-        holder.view.tableID.text = position.toString()
+        holder.view.tableID.text = movie.ID.toString()
         holder.view.tableQuantity.text =movie.quantity
         holder.view.TableCost.text = movie.price.toString()
         holder.view.tablegreenimg.setOnClickListener {
