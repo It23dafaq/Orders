@@ -11,9 +11,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.phone_app.UI.Adapters.cartAdapter
-import com.example.phone_app.UI.ViewModelFactory.HomeViewModelFactory
-import com.example.phone_app.UI.ViewModels.HomeViewModel
+import com.example.phone_app.ui.adapters.cartAdapter
+import com.example.phone_app.ui.viewmodelfactory.HomeViewModelFactory
+import com.example.phone_app.ui.viewmodels.HomeViewModel
 import kotlinx.android.synthetic.main.shop_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein

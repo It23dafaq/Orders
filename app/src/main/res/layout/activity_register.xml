@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".UI.RegisterActivity" android:background="@color/colorPrimary">
+        tools:context=".ui.RegisterActivity" android:background="@color/colorPrimary">
     <ImageView android:layout_width="250dp" android:layout_height="200dp"
                android:src="@drawable/register_img" app:layout_constraintEnd_toEndOf="parent"
                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"

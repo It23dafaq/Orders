@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Phone-App</string>
-    <string name="title_activity_main_view">Best Price</string>
-    <string name="title_home">Home</string>
-    <string name="title_action">Search</string>
-    <string name="title_shop">Shop</string>
-    <string name="title_profile">Profile</string>
+
+    <string name="language" translatable="false">en</string>
+
+    <string name="title_activity_main_view" translatable="false">Best Price</string>
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_action" translatable="false">Search</string>
+    <string name="title_shop" translatable="false">Shop</string>
+    <string name="title_profile" translatable="false">Profile</string>
 </resources>

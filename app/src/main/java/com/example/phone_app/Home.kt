@@ -2,8 +2,6 @@ package com.example.phone_app
 
 
 
-import android.app.Application
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 
 
@@ -12,28 +10,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 
 
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.phone_app.Data.Products
-import com.example.phone_app.Network.ConnectivityInterceptorImpl
-import com.example.phone_app.Network.ProductApi
-import com.example.phone_app.Network.ProductNetworkDataSourceImpl
-import com.example.phone_app.UI.Adapters.ProductAdapter
-import com.example.phone_app.UI.BaseFragment
-import com.example.phone_app.UI.ViewModelFactory.HomeViewModelFactory
-import com.example.phone_app.UI.ViewModels.HomeViewModel
+import com.example.phone_app.model.Products
+import com.example.phone_app.network.ConnectivityInterceptorImpl
+import com.example.phone_app.network.ProductApi
+import com.example.phone_app.network.ProductNetworkDataSourceImpl
+import com.example.phone_app.ui.adapters.ProductAdapter
+import com.example.phone_app.ui.BaseFragment
+import com.example.phone_app.ui.viewmodelfactory.HomeViewModelFactory
+import com.example.phone_app.ui.viewmodels.HomeViewModel
 import kotlinx.android.synthetic.main.home_fragment.*
 
 import org.kodein.di.KodeinAware
 
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.util.*
 import kotlin.collections.ArrayList
 
 

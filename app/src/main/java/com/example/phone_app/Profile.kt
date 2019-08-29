@@ -3,7 +3,6 @@ package com.example.phone_app
 
 import android.Manifest
 import android.app.Activity
-import android.app.Person
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -19,8 +18,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.phone_app.UI.ViewModelFactory.ProfileViewModelFactory
-import com.example.phone_app.UI.ViewModels.ProfileViewModel
+import com.example.phone_app.ui.viewmodelfactory.ProfileViewModelFactory
+import com.example.phone_app.ui.viewmodels.ProfileViewModel
 import kotlinx.android.synthetic.main.profile_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -61,7 +60,7 @@ class Profile : Fragment(),KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this,viewModelFactory).get(ProfileViewModel::class.java)
         // TODO: Use the ViewModel
-        UserName.text=com.example.phone_app.Data.Person.email
+        UserName.text=com.example.phone_app.model.Person.email
          viewModel.getUsers().observe(this, Observer {
              UserName.text = it.toString()
          })
