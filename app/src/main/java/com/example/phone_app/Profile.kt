@@ -37,7 +37,7 @@ class Profile : Fragment(),KodeinAware {
         fun newInstance() =
             Profile().apply {
                 arguments = Bundle().apply {
-                   putString("ID", "gjgjgjg")
+                   putString("ID", Id)
 
                 }
             }

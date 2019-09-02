@@ -14,12 +14,13 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".UI.AdminActivity">
+        </activity>
         <activity
                 android:name=".UI.MainViewActivity"
                 android:label="@string/title_activity_main_view">
         </activity>
-        <activity android:name=".UI.RegisterActivity">
-        </activity>
+       
         <activity android:name=".UI.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -37,8 +38,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".UI.MainActivity">
-            <meta-data android:name="android.app.searchable"
-                       android:resource="@xml/searchable" />
+            <meta-data
+                    android:name="android.app.searchable"
+                    android:resource="@xml/searchable"/>
         </activity>
     </application>
 
