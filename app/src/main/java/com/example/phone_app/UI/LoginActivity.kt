@@ -21,11 +21,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        goRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
 
-            startActivity(intent)
-        }
         login_btn.setOnClickListener {
 
             Person.email = emailLogin.text.toString()

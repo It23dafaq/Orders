@@ -1,6 +1,7 @@
 package com.example.phone_app
 
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 
@@ -24,6 +25,7 @@ import timber.log.Timber
 class Shop : Fragment() , KodeinAware {
     override val kodein by closestKodein()
     private val viewModelFactory: HomeViewModelFactory by instance()
+    var Id:String = ""
     companion object {
 
         @JvmStatic
@@ -53,14 +55,20 @@ class Shop : Fragment() , KodeinAware {
         viewModel = ViewModelProviders.of(this,viewModelFactory).get(HomeViewModel::class.java)
         // TODO: Use the ViewModel
        // val bundle = arguments
-
+        arguments?.getString("ID")?.let {
+            Id = it
+        }
         //   val cartArray: List<Products> = bundle!!.getParcelableArrayList<Products>("da")
         val cart = viewModel.getProduct()
         val adapter = cartAdapter(cart){
             viewModel.RemoveProduct(it)
 
         }
-
+        if(Id.equals(" ")){
+            tableID.text = "choose id"
+        }else{
+            tableID.text=Id
+        }
         shopcart.adapter=adapter
         shopcart.layoutManager = LinearLayoutManager(context!!)
      if(viewModel.GetSize()==0){
@@ -103,6 +111,7 @@ class Shop : Fragment() , KodeinAware {
          dialog.show()
      }
     }
+
      }
 
 

@@ -69,7 +69,7 @@ class MainViewActivity : AppCompatActivity() {
         (menu!!.findItem(R.id.app_bar_search).actionView as SearchView).apply {
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
         }
-     
+
         return true
     }
 

@@ -27,6 +27,7 @@ import org.kodein.di.generic.instance
 
 class Profile : Fragment(),KodeinAware {
     override val kodein by closestKodein()
+    var Id:String = ""
 
     /* activity specific bindings */
     private val viewModelFactory: ProfileViewModelFactory by instance()
@@ -36,7 +37,8 @@ class Profile : Fragment(),KodeinAware {
         fun newInstance() =
             Profile().apply {
                 arguments = Bundle().apply {
-                    // putString(ARG_PARAM1, param1)
+                   putString("ID", "gjgjgjg")
+
                 }
             }
     }
@@ -52,6 +54,7 @@ class Profile : Fragment(),KodeinAware {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this,viewModelFactory).get(ProfileViewModel::class.java)
         // TODO: Use the ViewModel
@@ -60,7 +63,9 @@ class Profile : Fragment(),KodeinAware {
        // val productNetworkDataSource = ProductNetworkDataSourceImpl(apiServic)
         viewModel.products.observe(this, Observer {
 
-            val adapter = TableAdapter(it)
+            val adapter = TableAdapter(it){
+               Id = it.ID.toString()
+            }
 
             tableRecyclerView.adapter = adapter
             tableRecyclerView.layoutManager = LinearLayoutManager(this.context)

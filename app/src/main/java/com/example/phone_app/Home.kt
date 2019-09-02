@@ -3,6 +3,7 @@ package com.example.phone_app
 
 
 import android.app.Application
+import android.content.Context
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 
@@ -54,7 +55,7 @@ class Home : BaseFragment(),KodeinAware {
     private val viewModelFactory: HomeViewModelFactory by instance()
     private var drinkSelected: String = ""
 
-
+    private var id = ""
 
     companion object {
 
@@ -151,6 +152,7 @@ class Home : BaseFragment(),KodeinAware {
         }
 
     }
+
 
 }
 
