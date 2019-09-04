@@ -1,6 +1,7 @@
 package com.example.phone_app
 
 
+import android.app.Person
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.phone_app.UI.Adapters.cartAdapter
 import com.example.phone_app.UI.ViewModelFactory.HomeViewModelFactory
 import com.example.phone_app.UI.ViewModels.HomeViewModel
@@ -94,8 +99,35 @@ class Shop : Fragment() , KodeinAware {
          // Set a positive button and its click listener on alert dialog
          builder.setPositiveButton("YES"){dialog, which ->
              // Do something when user press the positive button
+             var quan=0
+             var drinkname=""
+             for(item in cart){
+              quan=quan.plus(item.quantity.toInt())
+                drinkname=drinkname+item.name
+                }
+             val SignUpUrl = "https://rectifiable-merchan.000webhostapp.com/InsertOrder.php?Posotita="+quan+
+                     "&UserName="+com.example.phone_app.Data.Person.email+"&DrinkName="+drinkname+"&Price="+totalPayment+"&Comments="+""
 
+             val requestQ = Volley.newRequestQueue(context)
+             val stringRequest = StringRequest(Request.Method.GET,SignUpUrl, Response.Listener{ response ->
+                 if(response.equals("succes"))
+                 {
+                     cart.clear()
+                 }else {
+                     Log.d("some","something went wrong")
+                 }
+
+
+
+
+             }, Response.ErrorListener { error ->
+                 Log.d("lol",error.message.toString())
+             })
+             requestQ.add(stringRequest)
          }
+
+            // viewModel.insertORDERS(quan.toString(),com.example.phone_app.Data.Person.email,drinkname,totalPayment.toDouble(),"")
+
 
 
          // Display a negative button on alert dialog
