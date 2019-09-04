@@ -49,6 +49,7 @@ class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -
         //  holder.view.textViewRating.text = movie.rating
 
        // holder.view.textViewIsNew.visibility = if(movie.isNew == 1) View.VISIBLE else View.INVISIBLE
+      /*
         val drinksNames = arrayOf("1", "2", "3", "4", "5", "Bottle")
         val drinksSpinnerAdapter =
             ArrayAdapter(this.context!!, R.layout.support_simple_spinner_dropdown_item, drinksNames)
@@ -57,7 +58,7 @@ class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -
 
         holder.view.spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                holder.view.spinner2.setSelection(0).toString()
+                holder.view.spinner2.setSelection(position).toString()
 
             }
 
@@ -67,6 +68,7 @@ class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -
 
             }
         }
+        */
           holder.view.add_cart.setOnClickListener {
               withMultiChoiceList(context,movie)
 
@@ -101,8 +103,28 @@ class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -
 
             Toast.makeText(context, "Items selected are: " + Arrays.toString(selectedStrings.toTypedArray()), Toast.LENGTH_SHORT).show()
            movie.name = movie.name+" "+Arrays.toString(selectedStrings.toTypedArray())
+            withChoiceList(movie)
 
         }
+
+        builder.show()
+
+    }
+    fun withChoiceList(movie : Products) {
+
+
+        val drinkquantity = arrayOf("1", "2", "3", "4", "5", "Bottle")
+        val selectedList = ArrayList<Int>()
+        val builder = AlertDialog.Builder(context)
+
+        builder.setTitle("This is list choice dialog box")
+        builder.setItems(drinkquantity, { _, which ->
+            // Get the dialog selected item
+            val selected = drinkquantity[which]
+            movie.quantity = selected
+        })
+
+
 
         builder.show()
 

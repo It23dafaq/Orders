@@ -59,7 +59,11 @@ class Shop : Fragment() , KodeinAware {
         //   val cartArray: List<Products> = bundle!!.getParcelableArrayList<Products>("da")
         val cart = viewModel.getProduct()
         val adapter = cartAdapter(cart){
-            viewModel.RemoveProduct(it)
+             if(!cart.isNullOrEmpty()) {
+                 if(it!=-1) {
+                     viewModel.RemoveProduct(it)
+                 }
+                 }
 
         }
         if(Id.equals(" ")){
