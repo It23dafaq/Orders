@@ -34,17 +34,16 @@ import org.kodein.di.KodeinAware
 
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.util.*
 import kotlin.collections.ArrayList
 
 
-private var Position:Int=0
 
 class Home : BaseFragment(),KodeinAware {
     override fun layoutIname(): String {
         return "LoginFragment"
     }
 
+    private var Position:Int=0
 
     var cachedList: MutableList<Products> = ArrayList()
 
@@ -86,8 +85,8 @@ class Home : BaseFragment(),KodeinAware {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
        // viewModel.getUsers(drinkSelected)
 
-        val apiServic = ProductApi(ConnectivityInterceptorImpl(this.context!!))
-        val productNetworkDataSource = ProductNetworkDataSourceImpl(apiServic)
+        val apiService = ProductApi(ConnectivityInterceptorImpl(this.context!!))
+        val productNetworkDataSource = ProductNetworkDataSourceImpl(apiService)
         viewModel.products.observe(this, Observer {
 
             val adapter = ProductAdapter(it, { position ->
@@ -104,57 +103,20 @@ class Home : BaseFragment(),KodeinAware {
             //cachedList.addAll(listOf(it))
         })
 
-        val drinksNames = arrayOf("Vodka", "Rum", "Gin", "Tequila")
-        val drinksSpinnerAdapter =
-            ArrayAdapter(this.context!!, R.layout.support_simple_spinner_dropdown_item, drinksNames)
-        drinksSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1)
-        spinner.adapter = drinksSpinnerAdapter
+        val drinksNames = arrayOf("Vodka", "Rum", "Gin", "Tequila", "Vodka", "Rum", "Gin", "Tequila", "Vodka", "Rum", "Gin", "Tequila")
+        //drinksSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1)
+        spinner.adapter = DrinksAdapter(this.requireContext(),drinksNames)
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+           override fun onNothingSelected(p0: AdapterView<*>?) {
                 spinner.setSelection(Position).toString()
                 viewModel.getUsers(drinkSelected)
             }
-
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-
-             drinkSelected =  parent.getItemAtPosition(position).toString()
+                drinkSelected =  parent.getItemAtPosition(position).toString()
                 Position=position
                 viewModel.getUsers(drinkSelected)
             }
-            /*
-          productNetworkDataSource.downloadProduct.observe(this, Observer {
-
-              //textView4.text= it.toString()
-
-
-              val adapter = ProductAdapter(cachedList) { position ->
-                  shop.addAll(listOf(position))
-
-
-              }
-              recyclerproducts.adapter = adapter
-              recyclerproducts.layoutManager = LinearLayoutManager(this.context)
-
-
-              //  textView4.text=it.toString()
-              cachedList.addAll(it!!)
-
-          })
-  */
-
-
-            //   GlobalScope.launch(Dispatchers.Main) {
-            //       productNetworkDataSource.fetchCurrentWeather()
-            //   }
-
-
         }
-
     }
-
-
 }
-
-
-

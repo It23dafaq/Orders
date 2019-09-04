@@ -46,8 +46,6 @@ class Shop : Fragment() , KodeinAware {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.shop_fragment, container, false)
-
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
