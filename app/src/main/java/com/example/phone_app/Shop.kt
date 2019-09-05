@@ -77,6 +77,7 @@ class Shop : Fragment() , KodeinAware {
                  }
 
         }
+
         if(Id.equals("")){
             tableID.text = "choose id"
         }else{
@@ -111,7 +112,7 @@ class Shop : Fragment() , KodeinAware {
                  quan = quan.plus(item.quantity.toInt())
                  drinkname = drinkname + item.name
              }
-             InsertOrder(cart, quan.toString(), drinkname, totalPayment.toDouble())
+             InsertOrder(cart, quan.toString(), drinkname, totalPayment.toDouble(),adapter)
 
              // viewModel.insertORDERS(quan.toString(),com.example.phone_app.Data.Person.email,drinkname,totalPayment.toDouble(),"")
          }
@@ -131,10 +132,11 @@ class Shop : Fragment() , KodeinAware {
     }
         comment_btn.setOnClickListener {
             ShowCommentDialog()
+
         }
 
      }
-    fun InsertOrder(cart:MutableList<Products>,quan : String,drinkname:String,totalPayment:Double){
+    fun InsertOrder(cart:MutableList<Products>,quan : String,drinkname:String,totalPayment:Double,adapter: cartAdapter){
         val SignUpUrl = "https://rectifiable-merchan.000webhostapp.com/InsertOrder.php?Posotita="+quan+
                 "&UserName="+com.example.phone_app.Data.Person.email+"&DrinkName="+drinkname+"&Price="+totalPayment+"&Comments="+comments
 
@@ -143,6 +145,8 @@ class Shop : Fragment() , KodeinAware {
             if(response.equals("succes"))
             {
                 cart.clear()
+                adapter.notifyDataSetChanged()
+
             }else {
                 Log.d("some","something went wrong")
             }
