@@ -26,12 +26,19 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
+import android.R.string.cancel
+import android.content.DialogInterface
+import android.text.InputType
+import android.widget.EditText
+
+
 
 
 class Shop : Fragment() , KodeinAware {
     override val kodein by closestKodein()
     private val viewModelFactory: HomeViewModelFactory by instance()
     var Id:String = ""
+    private var comments = ""
     companion object {
 
         @JvmStatic
@@ -122,11 +129,14 @@ class Shop : Fragment() , KodeinAware {
          dialog.show()
 
     }
+        comment_btn.setOnClickListener {
+            ShowCommentDialog()
+        }
 
      }
     fun InsertOrder(cart:MutableList<Products>,quan : String,drinkname:String,totalPayment:Double){
         val SignUpUrl = "https://rectifiable-merchan.000webhostapp.com/InsertOrder.php?Posotita="+quan+
-                "&UserName="+com.example.phone_app.Data.Person.email+"&DrinkName="+drinkname+"&Price="+totalPayment+"&Comments="+""
+                "&UserName="+com.example.phone_app.Data.Person.email+"&DrinkName="+drinkname+"&Price="+totalPayment+"&Comments="+comments
 
         val requestQ = Volley.newRequestQueue(context)
         val stringRequest = StringRequest(Request.Method.GET,SignUpUrl, Response.Listener{ response ->
@@ -144,6 +154,26 @@ class Shop : Fragment() , KodeinAware {
             Log.d("lol",error.message.toString())
         })
         requestQ.add(stringRequest)
+    }
+    fun ShowCommentDialog(){
+        val builder = AlertDialog.Builder(context!!)
+        builder.setTitle("Title")
+
+// Set up the input
+        val input = EditText(context)
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        builder.setView(input)
+
+// Set up the buttons
+        builder.setPositiveButton(
+            "OK"
+        ) { dialog, which -> comments = input.text.toString() }
+        builder.setNegativeButton(
+            "Cancel"
+        ) { dialog, which -> dialog.cancel() }
+
+        builder.show()
     }
 
      }
