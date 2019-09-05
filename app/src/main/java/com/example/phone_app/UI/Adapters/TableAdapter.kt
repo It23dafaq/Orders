@@ -38,12 +38,12 @@ class TableAdapter(val phones: List<tables>,val clickListener: (tables) -> Unit)
             if(movie.isOkay ==false) {
                 holder.view.tablegreenimg.setImageResource(R.drawable.red_table)
                 movie.isOkay=true
-                val clickListener: (tables) -> Unit
+                 clickListener(movie)
             }else{
 
                 holder.view.tablegreenimg.setImageResource(R.drawable.green_table)
                 movie.isOkay=false
-                val clickListener: (tables) -> Unit
+                clickListener(movie)
             }
 
         }

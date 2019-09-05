@@ -27,20 +27,24 @@ import org.kodein.di.generic.instance
 
 class Profile : Fragment(),KodeinAware {
     override val kodein by closestKodein()
-    var Id:String = ""
+
 
     /* activity specific bindings */
     private val viewModelFactory: ProfileViewModelFactory by instance()
     companion object {
 
-        @JvmStatic
-        fun newInstance() =
-            Profile().apply {
-                arguments = Bundle().apply {
-                   putString("ID", Id)
+         var Id: String = ""
 
-                }
-            }
+        @JvmStatic
+        fun newInstance():Profile{
+            val frag = Profile()
+            val bundle = Bundle()
+            bundle.putString("ID",Id)
+            frag.arguments = bundle
+            return frag
+        }
+
+
     }
 
     private lateinit var viewModel: ProfileViewModel
@@ -61,11 +65,17 @@ class Profile : Fragment(),KodeinAware {
         viewModel.getUsers()
         val apiServic = TablesApi(ConnectivityInterceptorImpl(this.context!!))
        // val productNetworkDataSource = ProductNetworkDataSourceImpl(apiServic)
-        viewModel.products.observe(this, Observer {
+        viewModel.products.observe(this, Observer { it ->
 
-            val adapter = TableAdapter(it){
-               Id = it.ID.toString()
+            val adapter = TableAdapter(it) {
+
+                Id =it.ID.toString()
+                
             }
+
+
+
+
 
             tableRecyclerView.adapter = adapter
             tableRecyclerView.layoutManager = LinearLayoutManager(this.context)

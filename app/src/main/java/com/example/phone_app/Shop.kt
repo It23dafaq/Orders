@@ -38,7 +38,7 @@ class Shop : Fragment() , KodeinAware {
         fun newInstance() =
             Shop().apply {
                 arguments = Bundle().apply {
-                    // putString(ARG_PARAM1, param1)
+                   //  getString("ID",Id)
                 }
             }
     }
@@ -58,10 +58,8 @@ class Shop : Fragment() , KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this,viewModelFactory).get(HomeViewModel::class.java)
         // TODO: Use the ViewModel
-       // val bundle = arguments
-        arguments?.getString("ID")?.let {
-            Id = it
-        }
+
+       Id = Profile.Id
         //   val cartArray: List<Products> = bundle!!.getParcelableArrayList<Products>("da")
         val cart = viewModel.getProduct()
         val adapter = cartAdapter(cart){
@@ -72,7 +70,7 @@ class Shop : Fragment() , KodeinAware {
                  }
 
         }
-        if(Id.equals(" ")){
+        if(Id.equals("")){
             tableID.text = "choose id"
         }else{
             tableID.text=Id
