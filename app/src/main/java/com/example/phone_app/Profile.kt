@@ -70,7 +70,7 @@ class Profile : Fragment(),KodeinAware {
             val adapter = TableAdapter(it) {
 
                 Id =it.ID.toString()
-                
+
             }
 
 

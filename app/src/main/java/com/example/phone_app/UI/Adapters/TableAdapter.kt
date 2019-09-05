@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.phone_app.Data.Products
 import com.example.phone_app.Data.tables
+import com.example.phone_app.Profile
 import com.example.phone_app.R
 import kotlinx.android.synthetic.main.table_layout.view.*
 private var boolean : Boolean=true
@@ -27,10 +28,17 @@ class TableAdapter(val phones: List<tables>,val clickListener: (tables) -> Unit)
         holder.view.tableID.text = movie.ID.toString()
         holder.view.tableQuantity.text =movie.quantity
         holder.view.TableCost.text = movie.price.toString()
-        if(movie.isOkay ==false){
-            holder.view.tablegreenimg.setImageResource(R.drawable.green_table)
-
+        if(movie.isOkay ==false ){
+            if(!Profile.Id.equals("")) {
+                if (movie.ID == phones[Profile.Id.toInt()-1].ID) {
+                    holder.view.tablegreenimg.setImageResource(R.drawable.red_table)
+                    phones[Profile.Id.toInt()-1].isOkay=true
+                }
+                }else{
+                holder.view.tablegreenimg.setImageResource(R.drawable.green_table)
+            }
         }else{
+
             holder.view.tablegreenimg.setImageResource(R.drawable.red_table)
 
         }
