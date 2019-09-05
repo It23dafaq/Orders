@@ -161,7 +161,7 @@ class Shop : Fragment() , KodeinAware {
     }
     fun ShowCommentDialog(){
         val builder = AlertDialog.Builder(context!!)
-        builder.setTitle("Title")
+        builder.setTitle("Add Comments")
 
 // Set up the input
         val input = EditText(context)

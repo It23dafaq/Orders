@@ -84,7 +84,7 @@ class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -
         val selectedList = ArrayList<Int>()
         val builder = AlertDialog.Builder(context)
 
-        builder.setTitle("This is list choice dialog box")
+        builder.setTitle("Others")
         builder.setMultiChoiceItems(items, null
         ) { dialog, which, isChecked ->
             if (isChecked) {
@@ -117,7 +117,7 @@ class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -
         val selectedList = ArrayList<Int>()
         val builder = AlertDialog.Builder(context)
 
-        builder.setTitle("This is list choice dialog box")
+        builder.setTitle("Quantity")
         builder.setItems(drinkquantity, { _, which ->
             // Get the dialog selected item
             val selected = drinkquantity[which]
