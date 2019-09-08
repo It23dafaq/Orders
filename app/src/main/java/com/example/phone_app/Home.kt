@@ -34,6 +34,7 @@ import org.kodein.di.KodeinAware
 
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -54,8 +55,8 @@ class Home : BaseFragment(),KodeinAware {
     private val viewModelFactory: HomeViewModelFactory by instance()
     private var drinkSelected: String = ""
 
-    private var id = ""
 
+    var selectedStrings = ArrayList<String>()
     companion object {
 
         var shop: MutableList<Products> = ArrayList()
@@ -93,7 +94,7 @@ class Home : BaseFragment(),KodeinAware {
                 viewModel.addProduct(position)
 
 
-            },this.context!!)
+            },this.context!!,drinkSelected)
 
             recyclerproducts.adapter = adapter
             recyclerproducts.layoutManager = LinearLayoutManager(this.context)
@@ -119,4 +120,5 @@ class Home : BaseFragment(),KodeinAware {
             }
         }
     }
+
 }

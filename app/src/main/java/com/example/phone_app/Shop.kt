@@ -113,6 +113,7 @@ class Shop : Fragment() , KodeinAware {
                  drinkname = drinkname + item.name
              }
              InsertOrder(cart, quan.toString(), drinkname, totalPayment.toDouble(),adapter)
+             UpdateTable(cart, quan.toString(), drinkname, totalPayment.toDouble(),adapter)
 
              // viewModel.insertORDERS(quan.toString(),com.example.phone_app.Data.Person.email,drinkname,totalPayment.toDouble(),"")
          }
@@ -149,6 +150,31 @@ class Shop : Fragment() , KodeinAware {
 
             }else {
                 Log.d("some","something went wrong")
+            }
+
+
+
+
+        }, Response.ErrorListener { error ->
+            Log.d("lol",error.message.toString())
+        })
+        requestQ.add(stringRequest)
+    }
+
+    //https://rectifiable-merchan.000webhostapp.com/UpdateTable.php?Name=null&Quantity=3&TotalPrice=10&isOkay=0&ID=1
+    fun UpdateTable(cart:MutableList<Products>,quan : String,drinkname:String,totalPayment:Double,adapter: cartAdapter){
+        val SignUpUrl = "https://rectifiable-merchan.000webhostapp.com/UpdateTable.php?Name="+com.example.phone_app.Data.Person.email+
+                "&Quantity="+quan+"&TotalPrice="+totalPayment+"&isOkay="+0+"&ID="+Id
+
+        val requestQ = Volley.newRequestQueue(context)
+        val stringRequest = StringRequest(Request.Method.GET,SignUpUrl, Response.Listener{ response ->
+            if(response.equals("updated"))
+            {
+                Profile.Id=""
+
+            }else {
+                Log.d("some","something went wrong")
+                Profile.Id=""
             }
 
 

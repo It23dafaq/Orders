@@ -28,29 +28,30 @@ class TableAdapter(val phones: List<tables>,val clickListener: (tables) -> Unit)
         holder.view.tableID.text = movie.ID.toString()
         holder.view.tableQuantity.text =movie.quantity
         holder.view.TableCost.text = movie.price.toString()
-        if(movie.isOkay ==false ){
+        if(movie.isOkay ==0 ){
             if(!Profile.Id.equals("")) {
                 if (movie.ID == phones[Profile.Id.toInt()-1].ID) {
                     holder.view.tablegreenimg.setImageResource(R.drawable.red_table)
-                    phones[Profile.Id.toInt()-1].isOkay=true
+                    phones[Profile.Id.toInt()-1].isOkay=1
                 }
-                }else{
-                holder.view.tablegreenimg.setImageResource(R.drawable.green_table)
-            }
+                }else if(movie.isOkay ==0){
+                holder.view.tablegreenimg.setImageResource(R.drawable.red_table)
+
+               }
         }else{
 
-            holder.view.tablegreenimg.setImageResource(R.drawable.red_table)
+            holder.view.tablegreenimg.setImageResource(R.drawable.green_table)
 
         }
         holder.view.tablegreenimg.setOnClickListener {
-            if(movie.isOkay ==false) {
-                holder.view.tablegreenimg.setImageResource(R.drawable.red_table)
-                movie.isOkay=true
+            if(movie.isOkay ==0) {
+                holder.view.tablegreenimg.setImageResource(R.drawable.green_table)
+                movie.isOkay=1
                  clickListener(movie)
             }else{
 
-                holder.view.tablegreenimg.setImageResource(R.drawable.green_table)
-                movie.isOkay=false
+                holder.view.tablegreenimg.setImageResource(R.drawable.red_table)
+                movie.isOkay=0
                 clickListener(movie)
             }
 

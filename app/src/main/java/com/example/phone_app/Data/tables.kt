@@ -8,13 +8,13 @@ data class tables (
         @SerializedName("ID")
         var ID: Int,
         @SerializedName("Name")
-        val Name: Double,
+        val Name: String,
         @SerializedName("TotalPrice")
         val price: Double,
         @SerializedName("Quantity")
         var quantity: String,
         @SerializedName("isOkay")
-        var isOkay: Boolean
+        var isOkay: Int
 
 
 

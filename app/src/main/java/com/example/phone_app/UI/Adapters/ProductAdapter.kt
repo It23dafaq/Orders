@@ -18,8 +18,8 @@ import kotlinx.android.synthetic.main.products_layout.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -> Unit, private val context: Context) : RecyclerView.Adapter<ProductAdapter.MovieViewHolder>() {
-
+class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -> Unit, private val context: Context,private var item_spiner:String) : RecyclerView.Adapter<ProductAdapter.MovieViewHolder>() {
+    lateinit var items :Array<String>
     var selectedStrings = ArrayList<String>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
@@ -70,7 +70,7 @@ class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -
         }
         */
           holder.view.add_cart.setOnClickListener {
-              withMultiChoiceList(context,movie)
+              withMultiChoiceList(context,movie,item_spiner)
 
               clickListener(movie)
 
@@ -78,9 +78,16 @@ class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -
           }
 
     }
-    fun withMultiChoiceList(context: Context,movie : Products) {
-
-        val items = arrayOf("Cola", "Sprite","Orange Juice","Lemon Juice","Ice Tea","Sour cherry")
+    fun withMultiChoiceList(context: Context,movie : Products,item_spiner: String) {
+          if(item_spiner.equals("Rum")) {
+               items = arrayOf("Cola", "Sprite", "Orange Juice", "Lemon Juice", "Ice Tea", "Sour cherry")
+          }else if(item_spiner.equals("Vodka")){
+              items = arrayOf("Lemonade", "Sprite", "Orange Juice", "Lemon Juice","Cola","Ice Tea", "Sour cherry")
+          }else if(item_spiner.equals("Tequila")){
+              items = arrayOf("Redbull", "Sprite", "Orange Juice", "Lemon Juice","Cola", "Ice Tea", "Sour cherry")
+          }else{
+              items = arrayOf("Cola", "Sprite", "Orange Juice", "Lemon Juice", "Ice Tea", "Sour cherry")
+          }
         val selectedList = ArrayList<Int>()
         val builder = AlertDialog.Builder(context)
 
