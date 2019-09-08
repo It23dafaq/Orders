@@ -30,8 +30,8 @@ import android.R.string.cancel
 import android.content.DialogInterface
 import android.text.InputType
 import android.widget.EditText
-
-
+import android.widget.Toast
+import java.util.*
 
 
 class Shop : Fragment() , KodeinAware {
@@ -93,42 +93,49 @@ class Shop : Fragment() , KodeinAware {
 
 
      confirmOrder.setOnClickListener {
-        val totalPayment = viewModel.GetPrice()
-         Log.d("total",totalPayment.toString())
+         var quan = 0
+         val totalPayment = viewModel.GetPrice()
+         var drinkname = ""
+         if(!(Id.equals(""))){
+         for (item in cart) {
+             quan = quan.plus(item.quantity.toInt())
+             drinkname = drinkname + item.name
+         }
+
+
+                 Log.d("total", totalPayment.toString())
                  val builder = AlertDialog.Builder(this.context!!)
 
-         // Set the alert dialog title
-         builder.setTitle("Payment")
+                 // Set the alert dialog title
+                 builder.setTitle("Payment")
 
-         // Display a message on alert dialog
-         builder.setMessage("The total price is "+" "+totalPayment.toString()+" "+"do you want to continue ?")
+                 // Display a message on alert dialog
+                 builder.setMessage("The total price is " + " " + totalPayment.toString() + " " + "do you want to continue ?")
 
-         // Set a positive button and its click listener on alert dialog
-         builder.setPositiveButton("YES") { dialog, which ->
-             // Do something when user press the positive button
-             var quan = 0
-             var drinkname = ""
-             for (item in cart) {
-                 quan = quan.plus(item.quantity.toInt())
-                 drinkname = drinkname + item.name
-             }
-             InsertOrder(cart, quan.toString(), drinkname, totalPayment.toDouble(),adapter)
-             UpdateTable(cart, quan.toString(), drinkname, totalPayment.toDouble(),adapter)
+                 // Set a positive button and its click listener on alert dialog
+                 builder.setPositiveButton("YES") { dialog, which ->
+                     // Do something when user press the positive button
 
-             // viewModel.insertORDERS(quan.toString(),com.example.phone_app.Data.Person.email,drinkname,totalPayment.toDouble(),"")
+                     InsertOrder(cart, quan.toString(), drinkname, totalPayment.toDouble(), adapter)
+                     UpdateTable(cart, quan.toString(), drinkname, totalPayment.toDouble(), adapter)
+
+                     // viewModel.insertORDERS(quan.toString(),com.example.phone_app.Data.Person.email,drinkname,totalPayment.toDouble(),"")
+                 }
+
+                 // Display a negative button on alert dialog
+                 builder.setNegativeButton("No") { dialog, which ->
+                     Timber.i("Payment canceled")
+                 }
+
+
+                 // Finally, make the alert dialog using builder
+                 val dialog: AlertDialog = builder.create()
+
+                 // Display the alert dialog on app interface
+                 dialog.show()
+             }else{
+             Toast.makeText(context, "Make sure that you have choose table id quantity", Toast.LENGTH_SHORT).show()
          }
-
-         // Display a negative button on alert dialog
-         builder.setNegativeButton("No") { dialog, which ->
-             Timber.i("Payment canceled")
-         }
-
-
-         // Finally, make the alert dialog using builder
-         val dialog: AlertDialog = builder.create()
-
-         // Display the alert dialog on app interface
-         dialog.show()
 
     }
         comment_btn.setOnClickListener {

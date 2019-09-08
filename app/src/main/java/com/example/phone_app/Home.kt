@@ -91,6 +91,7 @@ class Home : BaseFragment(),KodeinAware {
         viewModel.products.observe(this, Observer {
 
             val adapter = ProductAdapter(it, { position ->
+
                 viewModel.addProduct(position)
 
 

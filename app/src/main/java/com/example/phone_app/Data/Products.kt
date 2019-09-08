@@ -18,9 +18,10 @@ data class Products(
     @SerializedName("Drink")
     var name: String,
     @SerializedName("Price")
-    val price: Double,
+    var price: Double,
     @SerializedName("cuantity")
-    var quantity: String
+    var quantity: Int,
+    var bottle:Int
 
 
 )

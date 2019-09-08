@@ -18,7 +18,6 @@ class HomeViewModel(private val homeController: HomeController) : ScopedViewMode
     var products = homeController.downloadProduct
     fun addProduct(list: Products) {
         addcart.add(list)
-
     }
 
     fun RemoveProduct(id: Int) {
@@ -26,7 +25,8 @@ class HomeViewModel(private val homeController: HomeController) : ScopedViewMode
     }
 
     fun GetPrice(): BigDecimal {
-        return addcart.sumByDouble { it.price * it.quantity.toInt() }.toBigDecimal()
+
+        return addcart.sumByDouble { it.price * it.quantity +it.bottle }.toBigDecimal()
     }
 
     fun getProduct(): MutableList<Products> {
