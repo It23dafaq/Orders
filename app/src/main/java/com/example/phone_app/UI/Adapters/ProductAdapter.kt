@@ -121,14 +121,13 @@ class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -
 
 
         val drinkquantity = arrayOf("1", "2", "3", "4", "5", "Bottle")
-        val selectedList = ArrayList<Int>()
         val builder = AlertDialog.Builder(context)
 
         builder.setTitle("Quantity")
         builder.setCancelable(false)
         builder.setItems(drinkquantity, { _, which ->
             // Get the dialog selected item
-            var selected = drinkquantity[which]
+            val selected = drinkquantity[which]
             if (selected.equals("Bottle")) {
                 movie.quantity = 10
                 movie.bottle=10
