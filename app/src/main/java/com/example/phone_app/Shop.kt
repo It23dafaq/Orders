@@ -95,7 +95,7 @@ class Shop : Fragment() , KodeinAware {
      confirmOrder.setOnClickListener {
         val totalPayment = viewModel.GetPrice()
          Log.d("total",totalPayment.toString())
-         val builder = AlertDialog.Builder(this.context!!)
+                 val builder = AlertDialog.Builder(this.context!!)
 
          // Set the alert dialog title
          builder.setTitle("Payment")
@@ -118,10 +118,10 @@ class Shop : Fragment() , KodeinAware {
              // viewModel.insertORDERS(quan.toString(),com.example.phone_app.Data.Person.email,drinkname,totalPayment.toDouble(),"")
          }
 
-             // Display a negative button on alert dialog
-             builder.setNegativeButton("No") { dialog, which ->
-                 Timber.i("Payment canceled")
-             }
+         // Display a negative button on alert dialog
+         builder.setNegativeButton("No") { dialog, which ->
+             Timber.i("Payment canceled")
+         }
 
 
          // Finally, make the alert dialog using builder

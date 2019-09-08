@@ -67,11 +67,11 @@ class Profile : Fragment(),KodeinAware {
        // val productNetworkDataSource = ProductNetworkDataSourceImpl(apiServic)
         viewModel.products.observe(this, Observer { it ->
 
-            val adapter = TableAdapter(it) {
+            val adapter = TableAdapter(it, {
 
                 Id =it.ID.toString()
 
-            }
+            },this.context!!)
 
 
 
