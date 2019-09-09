@@ -53,7 +53,7 @@ class Home : BaseFragment(),KodeinAware {
 
     /* activity specific bindings */
     private val viewModelFactory: HomeViewModelFactory by instance()
-    private var drinkSelected: String = ""
+    private var drinkSelected: String = "Vodka"
 
 
     var selectedStrings = ArrayList<String>()
@@ -86,8 +86,8 @@ class Home : BaseFragment(),KodeinAware {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
        // viewModel.getUsers(drinkSelected)
 
-        val apiService = ProductApi(ConnectivityInterceptorImpl(this.context!!))
-        val productNetworkDataSource = ProductNetworkDataSourceImpl(apiService)
+       // val apiService = ProductApi(ConnectivityInterceptorImpl(this.context!!))
+       // val productNetworkDataSource = ProductNetworkDataSourceImpl(apiService)
         viewModel.products.observe(this, Observer {
 
             val adapter = ProductAdapter(it, { position ->
@@ -95,7 +95,7 @@ class Home : BaseFragment(),KodeinAware {
                 viewModel.addProduct(position)
 
 
-            },this.context!!,drinkSelected)
+            },requireContext(),drinkSelected)
 
             recyclerproducts.adapter = adapter
             recyclerproducts.layoutManager = LinearLayoutManager(this.context)
@@ -112,6 +112,8 @@ class Home : BaseFragment(),KodeinAware {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
            override fun onNothingSelected(p0: AdapterView<*>?) {
                 spinner.setSelection(Position).toString()
+
+                drinkSelected="Vodka"
                 viewModel.getUsers(drinkSelected)
             }
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
