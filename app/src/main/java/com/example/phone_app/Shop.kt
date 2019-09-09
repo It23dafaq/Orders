@@ -1,8 +1,6 @@
 package com.example.phone_app
 
 
-import android.app.Person
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 
@@ -26,12 +24,9 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
-import android.R.string.cancel
-import android.content.DialogInterface
 import android.text.InputType
 import android.widget.EditText
 import android.widget.Toast
-import java.util.*
 
 
 class Shop : Fragment() , KodeinAware {
@@ -83,8 +78,8 @@ class Shop : Fragment() , KodeinAware {
         }else{
             tableID.text=Id
         }
-        shopcart.adapter=adapter
-        shopcart.layoutManager = LinearLayoutManager(context!!)
+        order_rec.adapter=adapter
+        order_rec.layoutManager = LinearLayoutManager(context!!)
      if(viewModel.GetSize()==0){
          confirmOrder.visibility = View.GONE
      }else{

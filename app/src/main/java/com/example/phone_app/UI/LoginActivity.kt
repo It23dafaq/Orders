@@ -25,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
         login_btn.setOnClickListener {
 
             Person.email = emailLogin.text.toString()
+            //val intent = Intent(this, AdminActivity::class.java)
             val intent = Intent(this, MainViewActivity::class.java)
             intent.putExtra("email", emailLogin.text)
             startActivity(intent)

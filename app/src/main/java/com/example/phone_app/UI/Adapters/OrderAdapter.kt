@@ -1,36 +1,32 @@
 package com.example.phone_app.UI.Adapters
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.phone_app.Data.Products
+import com.example.phone_app.Data.Orders
 import com.example.phone_app.R
 import kotlinx.android.synthetic.main.fragment_cart_view.view.*
 
-class cartAdapter(val phones: List<Products>,  val clickListener: (Int) -> Unit): RecyclerView.Adapter<cartAdapter.CartViewHolder>() {
+class OrderAdapter(val phones: List<Orders>): RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        return CartViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
+        return OrderViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_cart_view, parent, false)
+                .inflate(R.layout.order_recycle_view, parent, false)
         )
     }
 
     override fun getItemCount() = phones.size
 
-    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val movie = phones[position]
         //  holder.view.id = movie.id
         holder.view.NameWaiter.text = movie.name
         holder.view.price_order.text = movie.price.toString()
         holder.view.quantity.text = movie.quantity.toString()
-       holder.view.imageView4.setOnClickListener {
-           clickListener (holder.adapterPosition)
-           notifyItemRemoved(holder.adapterPosition)
-       }
+
         //  holder.view.textViewType.text = movie.type
         //  description
         //  holder.view.textViewRating.text = movie.rating
@@ -42,5 +38,5 @@ class cartAdapter(val phones: List<Products>,  val clickListener: (Int) -> Unit)
     }
 
 
-    class CartViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    class OrderViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 }
