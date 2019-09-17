@@ -21,7 +21,10 @@ data class Products(
     var price: Double,
     @SerializedName("cuantity")
     var quantity: Int,
-    var bottle:Int
+    var bottle:Int,
+    @SerializedName("Bottle_img")
+    var img:String
+
 
 
 )

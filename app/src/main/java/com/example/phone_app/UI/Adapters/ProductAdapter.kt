@@ -3,6 +3,7 @@ package com.example.phone_app.UI.Adapters
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +38,10 @@ class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -
         holder.view.price.text = movie.price.toString() +" "+ "$"
 
        val imageView = holder.view.imageView6
-      //  Picasso.get().load(movie.picture).resize(150,300).into(imageView)
+//        Log.d("img",movie.img)
+//       var img =  movie.img.replace("\"","")
+//        Log.d("img",img)
+       Picasso.get().load(R.drawable.gin_gordons).resize(150,300).into(imageView)
         if(imageView.isSelected) {
         //    Picasso.get().load(movie.picture).resize(250,350).into(imageView)
         }else{

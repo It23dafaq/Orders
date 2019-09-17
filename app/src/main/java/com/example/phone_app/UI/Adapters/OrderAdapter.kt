@@ -27,6 +27,7 @@ class OrderAdapter(val phones: List<Orders>): RecyclerView.Adapter<OrderAdapter.
         holder.view.price_order.text = movie.price.toString()
         holder.view.quantity.text = movie.quantity.toString()
 
+
         //  holder.view.textViewType.text = movie.type
         //  description
         //  holder.view.textViewRating.text = movie.rating

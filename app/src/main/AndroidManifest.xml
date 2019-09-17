@@ -20,7 +20,8 @@
         </activity>
         <activity
                 android:name=".UI.MainViewActivity"
-                android:label="@string/title_activity_main_view">
+                android:label="@string/title_activity_main_view"
+                android:screenOrientation="portrait">
         </activity>
         <activity android:name=".UI.LoginActivity">
             <intent-filter>
