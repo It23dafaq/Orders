@@ -113,10 +113,10 @@ class Shop : Fragment() , KodeinAware {
                  // Set a positive button and its click listener on alert dialog
                  builder.setPositiveButton("YES") { dialog, which ->
                      // Do something when user press the positive button
-
+                     printDocument()
                      InsertOrder(cart, quan.toString(), drinkname, totalPayment.toDouble(), adapter)
                      UpdateTable(cart, quan.toString(), drinkname, totalPayment.toDouble(), adapter)
-                     printDocument()
+
 
                      // viewModel.insertORDERS(quan.toString(),com.example.phone_app.Data.Person.email,drinkname,totalPayment.toDouble(),"")
                  }
@@ -216,7 +216,7 @@ class Shop : Fragment() , KodeinAware {
 
         val jobName = this.getString(R.string.app_name) + " Document"
 
-        printManager.print(jobName, PrintAdapter(context!!,viewModel.getProduct(),Id), null)
+        printManager.print(jobName, PrintAdapter(context!!,viewModel.getProduct(),Id,viewModel.GetPrice()), null)
     }
 
      }

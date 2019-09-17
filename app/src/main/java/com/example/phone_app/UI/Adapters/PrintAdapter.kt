@@ -14,12 +14,14 @@ import android.print.pdf.PrintedPdfDocument
 import com.example.phone_app.Data.Products
 import java.io.FileOutputStream
 import java.io.IOException
+import java.math.BigDecimal
 import android.print.PrintAttributes as PrintAttributes1
 
 class PrintAdapter(
     private var context: Context,
     cart: MutableList<Products>,
-    id: String
+    id: String,
+    getPrice: BigDecimal
 ): PrintDocumentAdapter() {
     private var drinks = cart
     private var id =id
@@ -27,6 +29,7 @@ class PrintAdapter(
     private var pageWidth: Int = 0
     private var myPdfDocument: PdfDocument? = null
     private var totalpages = 1
+    private var total=getPrice
     override fun onLayout(
         oldAttributes: PrintAttributes1,
         newAttributes: PrintAttributes1,
@@ -142,9 +145,11 @@ class PrintAdapter(
             paint
         )
 
-        paint.textSize = 14f
+        paint.textSize = 25f
         canvas.drawText(
-            "Table ID"+id+"Drinks"+cart.toString(),
+            "Table ID : "+id+System.lineSeparator()+
+                    "Drinks"+cart.toString()+System.lineSeparator()+
+                    "Price"+total,
             leftMargin.toFloat(),
             (titleBaseLine + 35).toFloat(),
             paint
