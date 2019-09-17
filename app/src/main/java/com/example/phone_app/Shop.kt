@@ -1,7 +1,9 @@
 package com.example.phone_app
 
 
+import android.content.Context
 import android.os.Bundle
+import android.print.PrintManager
 import android.util.Log
 
 import android.view.LayoutInflater
@@ -27,6 +29,7 @@ import timber.log.Timber
 import android.text.InputType
 import android.widget.EditText
 import android.widget.Toast
+import com.example.phone_app.UI.Adapters.PrintAdapter
 
 
 class Shop : Fragment() , KodeinAware {
@@ -113,6 +116,7 @@ class Shop : Fragment() , KodeinAware {
 
                      InsertOrder(cart, quan.toString(), drinkname, totalPayment.toDouble(), adapter)
                      UpdateTable(cart, quan.toString(), drinkname, totalPayment.toDouble(), adapter)
+                     printDocument()
 
                      // viewModel.insertORDERS(quan.toString(),com.example.phone_app.Data.Person.email,drinkname,totalPayment.toDouble(),"")
                  }
@@ -206,6 +210,13 @@ class Shop : Fragment() , KodeinAware {
         ) { dialog, which -> dialog.cancel() }
 
         builder.show()
+    }
+    fun printDocument() {
+        val printManager = context?.getSystemService(Context.PRINT_SERVICE) as PrintManager
+
+        val jobName = this.getString(R.string.app_name) + " Document"
+
+        printManager.print(jobName, PrintAdapter(context!!,viewModel.getProduct(),Id), null)
     }
 
      }
