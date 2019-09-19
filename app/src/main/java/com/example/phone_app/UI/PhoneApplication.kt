@@ -1,10 +1,7 @@
 package com.example.phone_app.UI
 
 import android.app.Application
-import com.example.phone_app.Network.ConnectivityInterceptor
-import com.example.phone_app.Network.ConnectivityInterceptorImpl
-import com.example.phone_app.Network.ProductApi
-import com.example.phone_app.Network.TablesApi
+import com.example.phone_app.Network.*
 import com.example.phone_app.UI.Controllers.*
 import com.example.phone_app.UI.ViewModelFactory.HomeViewModelFactory
 import com.example.phone_app.UI.ViewModelFactory.ProfileViewModelFactory
@@ -26,7 +23,14 @@ class PhoneApplication:Application(), KodeinAware {
         //Service
         bind() from singleton { ProductApi(instance()) }
         bind() from singleton { TablesApi (instance()) }
+        bind() from singleton { OrderApi(instance()) }
         //controller
+        bind<OrderNetworkDatasource>() with singleton {
+            OrderNetworkDatasourceImpl(
+                instance()
+            )
+        }
+
         bind<HomeController>() with singleton {
             HomeControllerIml(
                 instance()
@@ -42,8 +46,13 @@ class PhoneApplication:Application(), KodeinAware {
                 instance()
             )
         }
+        bind<OrderController>() with singleton {
+            OrderControllerImpl(
+                instance()
+            )
+        }
         //viewModels
-        bind() from provider { HomeViewModelFactory(instance()) }
+        bind() from provider { HomeViewModelFactory(instance(),instance()) }
         bind() from provider { ProfileViewModelFactory(instance()) }
         bind() from provider { ShopViewModelFactory(instance()) }
     }

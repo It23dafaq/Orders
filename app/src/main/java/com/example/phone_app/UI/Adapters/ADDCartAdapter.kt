@@ -26,7 +26,7 @@ class cartAdapter(val phones: List<Products>,  val clickListener: (Int) -> Unit)
         //  holder.view.id = movie.id
         holder.view.NameWaiter.text = movie.name
         holder.view.price_order.text = movie.price.toString()
-        holder.view.quantity.text = movie.quantity.toString()
+        holder.view.quantity_order.text = movie.quantity.toString()
        holder.view.imageView4.setOnClickListener {
            clickListener (holder.adapterPosition)
            notifyItemRemoved(holder.adapterPosition)

@@ -41,9 +41,9 @@
 
             android:layout_width="0dp"
             android:layout_height="0dp"
-            tools:listitem="@layout/order_recycle_view"
+            tools:listitem="@layout/dailyrecyclerview"
             app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/daily_recycler"
+            android:id="@+id/da_recy"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"

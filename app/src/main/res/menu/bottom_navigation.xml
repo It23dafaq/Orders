@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item
-    android:id="@+id/nav_home"
+    android:id="@+id/nav_Orders"
     android:icon="@drawable/ic_home_black_24dp"
-    android:title="Home"/>
+    android:title="Orders"/>
 
     <item
-            android:id="@+id/nav_cart"
+            android:id="@+id/nav_filter"
             android:icon="@drawable/ic_add_shopping_cart_black_24dp"
-            android:title="Shop"/>
+            android:title="Filter"/>
     <item
-            android:id="@+id/nav_profile"
+            android:id="@+id/nav_byName"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="Profile"/>
+            android:title="OrdersByname"/>
 </menu>

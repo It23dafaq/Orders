@@ -7,15 +7,18 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.phone_app.Data.Products
+import com.example.phone_app.Network.OrderNetworkDatasource
 import com.example.phone_app.ScopedViewModel
 import com.example.phone_app.UI.Controllers.HomeController
+import com.example.phone_app.UI.Controllers.OrderController
 import java.math.BigDecimal
 
 var addcart : MutableList<Products> = ArrayList()
-class HomeViewModel(private val homeController: HomeController) : ScopedViewModel() {
+class HomeViewModel(private val homeController: HomeController,private val OrderController:OrderController) : ScopedViewModel() {
     // TODO: Implement the ViewModel
 
     var products = homeController.downloadProduct
+    var ordersDaily = OrderController.downloadProduct
     fun addProduct(list: Products) {
         addcart.add(list)
     }
@@ -44,6 +47,14 @@ class HomeViewModel(private val homeController: HomeController) : ScopedViewMode
 
 
     }
+    fun getOrders(filter:String) {
+        launchWithLoad({
+            OrderController.fetchOrders(filter)
+        }) {}
+
+
+    }
+
     fun insertORDERS(quantity: String, username: String, DrinkName: String, Price: Double, Comments: String) {
 
         launchWithLoad({

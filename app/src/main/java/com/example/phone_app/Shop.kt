@@ -81,8 +81,8 @@ class Shop : Fragment() , KodeinAware {
         }else{
             tableID.text=Id
         }
-        order_rec.adapter=adapter
-        order_rec.layoutManager = LinearLayoutManager(context!!)
+        daily_recycler.adapter=adapter
+        daily_recycler.layoutManager = LinearLayoutManager(context!!)
      if(viewModel.GetSize()==0){
          confirmOrder.visibility = View.GONE
      }else{

@@ -4,16 +4,16 @@ import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 
-@Entity(tableName = "products")
+@Entity(tableName = "Orders")
 data class Orders (
     @SerializedName("Posotita")
-    var name: String,
+    var posotita: String,
     @SerializedName("UserName")
-    var price: Double,
+    var Username:String,
+    @SerializedName("DrinkName")
+    var Drink:String,
     @SerializedName("Price")
-    var quantity: Int,
-    @SerializedName("Comments")
-    var Comments:String,
+    var price: Double,
     @SerializedName("Time")
     var Time:String
 )
