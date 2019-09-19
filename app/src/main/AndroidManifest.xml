@@ -18,7 +18,7 @@
                 android:name=".UI.Admin.AdminActivity"
                 android:label="@string/title_activity_admin">
         </activity>
-        
+
         <activity
                 android:name=".UI.MainViewActivity"
                 android:label="@string/title_activity_main_view"

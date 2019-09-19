@@ -17,12 +17,21 @@ class OrderControllerImpl(
         get() = _downloadProduct
 
     override suspend fun fetchOrders(filter: String) {
-               if(filter.equals("Generic")){
-                   val fetchOrders = apiOrders.getOrders().await()
+               if(filter.equals("Today")){
+                   val fetchOrders = apiOrders.getDaily().await()
+                   _downloadProduct.postValue(fetchOrders)
+               }else if(filter.equals("Week")){
+
+                   val fetchOrders = apiOrders.getWeek().await()
+                   _downloadProduct.postValue(fetchOrders)
+               }else if(filter.equals("Month")){
+                   val fetchOrders = apiOrders.getMonth().await()
+                   _downloadProduct.postValue(fetchOrders)
+               }else if(filter.equals("Year")){
+                   val fetchOrders = apiOrders.getYear().await()
                    _downloadProduct.postValue(fetchOrders)
                }else{
-
-                   val fetchOrders = apiOrders.getDaily().await()
+                   val fetchOrders = apiOrders.getOrders().await()
                    _downloadProduct.postValue(fetchOrders)
                }
 

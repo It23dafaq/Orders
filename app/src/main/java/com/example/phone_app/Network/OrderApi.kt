@@ -20,6 +20,15 @@ interface OrderApi{
     @GET("ShowTodayOrders.php")
     fun getDaily() : Deferred<List<Orders>>
 
+    @GET("ShowTodayOrders.php")
+    fun getWeek() : Deferred<List<Orders>>
+
+    @GET("ShowMonthOrders.php")
+    fun getMonth() : Deferred<List<Orders>>
+
+    @GET("ShowYearOrders.php")
+    fun getYear() : Deferred<List<Orders>>
+
 
 
     companion object {

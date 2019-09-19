@@ -1,21 +1,21 @@
 package com.example.phone_app.UI.Adapters
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.phone_app.Data.Products
+import com.example.phone_app.Data.Orders
 import com.example.phone_app.R
 import kotlinx.android.synthetic.main.fragment_cart_view.view.*
+import kotlinx.android.synthetic.main.order_recycle_view.view.drinksdaily
 
-class cartAdapter(val phones: List<Products>,  val clickListener: (Int) -> Unit): RecyclerView.Adapter<cartAdapter.CartViewHolder>() {
+class dailyAdapter(val phones: List<Orders>): RecyclerView.Adapter<dailyAdapter.CartViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         return CartViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_cart_view, parent, false)
+                .inflate(R.layout.dailyrecyclerview, parent, false)
         )
     }
 
@@ -24,19 +24,9 @@ class cartAdapter(val phones: List<Products>,  val clickListener: (Int) -> Unit)
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val movie = phones[position]
         //  holder.view.id = movie.id
-        holder.view.NameWaiter.text = movie.name
+        holder.view.drinksdaily.text = movie.Drink
         holder.view.pricedaily.text = movie.price.toString()
-        holder.view.quantitydaily.text = movie.quantity.toString()
-       holder.view.imageView4.setOnClickListener {
-           clickListener (holder.adapterPosition)
-           notifyItemRemoved(holder.adapterPosition)
-       }
-        //  holder.view.textViewType.text = movie.type
-        //  description
-        //  holder.view.textViewRating.text = movie.rating
-
-        // holder.view.textViewIsNew.visibility = if(movie.isNew == 1) View.VISIBLE else View.INVISIBLE
-
+        holder.view.quantitydaily.text = movie.posotita
 
 
     }
