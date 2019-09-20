@@ -9,6 +9,11 @@ import com.example.phone_app.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_spinner_layout.view.*
 import kotlinx.android.synthetic.main.spiner_admin_choose.view.*
+import android.view.Gravity
+import com.paypal.android.sdk.v
+import android.widget.TextView
+
+
 
 
 class ChooseAdapter(var context: Context,  var filterName: Array<String>) : BaseAdapter(),
@@ -27,12 +32,14 @@ class ChooseAdapter(var context: Context,  var filterName: Array<String>) : Base
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        val view =  View.inflate(context, R.layout.spiner_admin_choose, null)
+        val view =  View.inflate(context, com.example.phone_app.R.layout.spiner_admin_choose, null)
         view?.choose?.text = filterName[position]
         return view
     }
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        return super.getDropDownView(position, convertView, parent)
+        val v = super.getDropDownView(position, convertView, parent)
+        v.choose.gravity = Gravity.CENTER
+        return v
     }
 }

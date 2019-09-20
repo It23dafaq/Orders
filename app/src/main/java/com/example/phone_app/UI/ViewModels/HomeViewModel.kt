@@ -54,6 +54,11 @@ class HomeViewModel(private val homeController: HomeController,private val Order
 
 
     }
+    fun getOrdersByname(name:String,filter:String){
+        launchWithLoad({
+            OrderController.fetchOrdersByname(filter,name)
+        }) {}
+    }
 
     fun insertORDERS(quantity: String, username: String, DrinkName: String, Price: Double, Comments: String) {
 

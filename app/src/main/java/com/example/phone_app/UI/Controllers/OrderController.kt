@@ -12,6 +12,23 @@ import com.example.phone_app.Network.OrderNetworkDatasource
 class OrderControllerImpl(
     private val apiOrders: OrderApi
 ) : OrderController {
+    override suspend fun fetchOrdersByname(filter: String, name: String) {
+        if(filter.equals("Today")){
+            val fetchOrders = apiOrders.getDailyByname(name).await()
+            _downloadProduct.postValue(fetchOrders)
+        }else if (filter.equals("Week")){
+            val fetchOrders = apiOrders.getWeekByname(name).await()
+            _downloadProduct.postValue(fetchOrders)
+        }else if (filter.equals("Month")){
+            val fetchOrders = apiOrders.getMonthByname(name).await()
+            _downloadProduct.postValue(fetchOrders)
+        }else{
+            val fetchOrders = apiOrders.getYearByname(name).await()
+            _downloadProduct.postValue(fetchOrders)
+        }
+
+    }
+
     private val _downloadProduct = MutableLiveData<List<Orders>>()
     override val downloadProduct: LiveData<List<Orders>>
         get() = _downloadProduct
@@ -46,4 +63,5 @@ interface OrderController {
     val downloadProduct: LiveData<List<Orders>>
 
     suspend fun fetchOrders(filter:String)
+    suspend fun fetchOrdersByname(filter: String,name:String)
 }

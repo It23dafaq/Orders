@@ -9,6 +9,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 //const val BASE_URLtables1 = "https://rectifiable-merchan.000webhostapp.com/"
 
@@ -29,7 +30,14 @@ interface OrderApi{
     @GET("ShowYearOrders.php")
     fun getYear() : Deferred<List<Orders>>
 
-
+    @GET("OrderBynameDateYear.php")
+    fun getYearByname(@Query("UserName") name: String) : Deferred<List<Orders>>
+    @GET("OrderBynameDateMonth.php")
+    fun getWeekByname(@Query("UserName")  name: String) : Deferred<List<Orders>>
+    @GET("OrderBynameDateMonth.php")
+    fun getMonthByname(@Query("UserName") name: String) : Deferred<List<Orders>>
+    @GET("OrderBynameDateDay.php")
+    fun getDailyByname(@Query("UserName") name: String) : Deferred<List<Orders>>
 
     companion object {
         operator fun invoke(

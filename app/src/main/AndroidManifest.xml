@@ -16,7 +16,8 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".UI.Admin.AdminActivity"
-                android:label="@string/title_activity_admin">
+                android:label="@string/title_activity_admin"
+                android:screenOrientation="portrait">
         </activity>
 
         <activity

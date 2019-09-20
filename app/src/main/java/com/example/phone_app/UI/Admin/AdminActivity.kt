@@ -28,7 +28,7 @@ class AdminActivity : AppCompatActivity() {
                 Filter_Admin_fragment.newInstance()
             }
             R.id.nav_byName -> {
-                Profile.newInstance()
+                Admin_filterByName.newInstance()
             }
             else -> {
                 null
