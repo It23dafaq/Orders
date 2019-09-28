@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.phone_app.Data.Orders
 import com.example.phone_app.R
-import kotlinx.android.synthetic.main.fragment_cart_view.view.*
+import kotlinx.android.synthetic.main.fragment_cart_view.view.NameWaiter
+import kotlinx.android.synthetic.main.order_recycle_view.view.*
 
 class OrderAdapter(val phones: List<Orders>): RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
@@ -23,9 +24,12 @@ class OrderAdapter(val phones: List<Orders>): RecyclerView.Adapter<OrderAdapter.
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val movie = phones[position]
         //  holder.view.id = movie.id
-        holder.view.NameWaiter.text = movie.name
-        holder.view.price_order.text = movie.price.toString()
-        holder.view.quantity.text = movie.quantity.toString()
+        holder.view.NameWaiter.text = movie.Username
+        holder.view.pricedaily.text = movie.price.toString()
+        holder.view.drinksdaily.text = movie.Drink
+        holder.view.quantitydaily.text = movie.posotita
+        holder.view.Time_Order.text=movie.Time
+
 
         //  holder.view.textViewType.text = movie.type
         //  description

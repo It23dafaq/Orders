@@ -8,6 +8,5 @@ interface ProductNetworkDataSource {
     val downloadProduct: LiveData<List<Products>>
 
     suspend fun fetchCurrentWeather(
-
     )
 }

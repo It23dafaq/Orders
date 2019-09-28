@@ -13,6 +13,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.phone_app.Data.Person
 import com.example.phone_app.R
+import com.example.phone_app.UI.Admin.AdminActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -23,12 +24,12 @@ class LoginActivity : AppCompatActivity() {
 
 
         login_btn.setOnClickListener {
-
-            Person.email = emailLogin.text.toString()
-            val intent = Intent(this, AdminActivity::class.java)
-           // val intent = Intent(this, MainViewActivity::class.java)
-            intent.putExtra("email", emailLogin.text)
-            startActivity(intent)
+//
+//            Person.email = emailLogin.text.toString()
+//            //val intent = Intent(this, AdminActivity::class.java)
+//            val intent = Intent(this, MainViewActivity::class.java)
+//            intent.putExtra("email", emailLogin.text)
+//            startActivity(intent)
 
             val loginUrl="https://rectifiable-merchan.000webhostapp.com/e_com/login_app_user.php?email="+emailLogin.text.toString()+
                     "&password="+passLogin.text.toString()
@@ -37,8 +38,16 @@ class LoginActivity : AppCompatActivity() {
             val stringRequest = StringRequest(Request.Method.GET,loginUrl, Response.Listener {
                     response ->
                 if(response.equals("The user does exist")){
+                    val intent = Intent(this, MainViewActivity::class.java)
+                    intent.putExtra("email", emailLogin.text)
+                    startActivity(intent)
                     Toast.makeText(this@LoginActivity,response,Toast.LENGTH_SHORT).show()
-                }else{
+                }else if (response.equals("the user is admin")){
+                    val intent = Intent(this, AdminActivity::class.java)
+                    intent.putExtra("email", emailLogin.text)
+                    startActivity(intent)
+                }
+                else{
                     createDialog(response)
                 }
 

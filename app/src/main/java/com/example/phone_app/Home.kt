@@ -2,9 +2,6 @@ package com.example.phone_app
 
 
 
-import android.app.Application
-import android.content.Context
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 
 
@@ -12,18 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 
 
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.phone_app.Data.Products
-import com.example.phone_app.Network.ConnectivityInterceptorImpl
-import com.example.phone_app.Network.ProductApi
-import com.example.phone_app.Network.ProductNetworkDataSourceImpl
+import com.example.phone_app.UI.Adapters.DrinksAdapter
 import com.example.phone_app.UI.Adapters.ProductAdapter
 import com.example.phone_app.UI.BaseFragment
 import com.example.phone_app.UI.ViewModelFactory.HomeViewModelFactory
@@ -34,7 +26,6 @@ import org.kodein.di.KodeinAware
 
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -107,7 +98,7 @@ class Home : BaseFragment(),KodeinAware {
 
         val drinksNames = arrayOf("Vodka", "Rum", "Gin", "Tequila", "Vodka", "Rum", "Gin", "Tequila", "Vodka", "Rum", "Gin", "Tequila")
         //drinksSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1)
-        spinner.adapter = DrinksAdapter(this.requireContext(),drinksNames)
+        spinner.adapter = DrinksAdapter(this.requireContext(), drinksNames)
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
            override fun onNothingSelected(p0: AdapterView<*>?) {

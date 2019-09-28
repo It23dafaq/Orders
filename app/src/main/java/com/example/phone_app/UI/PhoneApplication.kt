@@ -22,17 +22,20 @@ class PhoneApplication:Application(), KodeinAware {
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         //Service
         bind() from singleton { ProductApi(instance()) }
-        bind() from singleton { TablesApi(instance()) }
+        bind() from singleton { TablesApi (instance()) }
         bind() from singleton { OrderApi(instance()) }
         //controller
+        bind<OrderNetworkDatasource>() with singleton {
+            OrderNetworkDatasourceImpl(
+                instance()
+            )
+        }
+
         bind<HomeController>() with singleton {
             HomeControllerIml(
                 instance()
             )
         }
-        bind<OrderNetworkDatasource>() with singleton {
-              OrderNetworkDatasourceImpl(instance())
-         }
         bind<ShopController>() with singleton {
             ShopControllerImpl(
                 instance()
@@ -43,8 +46,13 @@ class PhoneApplication:Application(), KodeinAware {
                 instance()
             )
         }
+        bind<OrderController>() with singleton {
+            OrderControllerImpl(
+                instance()
+            )
+        }
         //viewModels
-        bind() from provider { HomeViewModelFactory(instance()) }
+        bind() from provider { HomeViewModelFactory(instance(),instance()) }
         bind() from provider { ProfileViewModelFactory(instance()) }
         bind() from provider { ShopViewModelFactory(instance()) }
     }
