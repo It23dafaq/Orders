@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 
 
 import androidx.fragment.app.Fragment
@@ -17,6 +19,7 @@ import com.example.phone_app.Network.TablesApi
 import com.example.phone_app.UI.Adapters.TableAdapter
 import com.example.phone_app.UI.ViewModelFactory.ProfileViewModelFactory
 import com.example.phone_app.UI.ViewModels.ProfileViewModel
+import kotlinx.android.synthetic.main.fragment_admin_filter_by_name.*
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 import org.kodein.di.KodeinAware
@@ -73,7 +76,23 @@ class Profile : Fragment(),KodeinAware {
 
             },this.context!!)
 
+            tableIDtext.setOnEditorActionListener { v, actionId, event ->
+                if(actionId == EditorInfo.IME_ACTION_DONE || actionId== EditorInfo.IME_ACTION_GO ||actionId== EditorInfo.IME_ACTION_NEXT || actionId== EditorInfo.IME_ACTION_SEARCH ){
 
+                    var numeric = true
+                    numeric =  tableIDtext.text.toString().matches("-?\\d+(\\.\\d+)?".toRegex())
+                    if(numeric && tableIDtext.text.toString().toInt()<= 34 && tableIDtext.text.toString().toInt()>=1) {
+                        tableRecyclerView.scrollToPosition(tableIDtext.text.toString().toInt()-1)
+                    }else{
+                        Toast.makeText(requireContext(),"You have to place number smaller than 34 and bigger than 0",Toast.LENGTH_SHORT).show()
+                        tableIDtext.text.clear()
+                    }
+
+                    false
+                } else {
+                    true
+                }
+            }
 
 
 
