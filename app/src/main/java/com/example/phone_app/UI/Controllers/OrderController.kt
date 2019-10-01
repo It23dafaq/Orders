@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.phone_app.CustomIOException.NoConnectivityException
 import com.example.phone_app.Data.Orders
+import com.example.phone_app.Data.OrdersByname
 import com.example.phone_app.Network.OrderApi
 import com.example.phone_app.Network.OrderNetworkDatasource
 
@@ -15,20 +16,22 @@ class OrderControllerImpl(
     override suspend fun fetchOrdersByname(filter: String, name: String) {
         if(filter.equals("Today")){
             val fetchOrders = apiOrders.getDailyByname(name).await()
-            _downloadProduct.postValue(fetchOrders)
+            _downloadProductbyname.postValue(fetchOrders)
         }else if (filter.equals("Week")){
             val fetchOrders = apiOrders.getWeekByname(name).await()
-            _downloadProduct.postValue(fetchOrders)
+            _downloadProductbyname.postValue(fetchOrders)
         }else if (filter.equals("Month")){
             val fetchOrders = apiOrders.getMonthByname(name).await()
-            _downloadProduct.postValue(fetchOrders)
+            _downloadProductbyname.postValue(fetchOrders)
         }else{
             val fetchOrders = apiOrders.getYearByname(name).await()
-            _downloadProduct.postValue(fetchOrders)
+            _downloadProductbyname.postValue(fetchOrders)
         }
 
     }
-
+    private val _downloadProductbyname = MutableLiveData<List<OrdersByname>>()
+    override val downloadProductbyname: LiveData<List<OrdersByname>>
+        get() = _downloadProductbyname
     private val _downloadProduct = MutableLiveData<List<Orders>>()
     override val downloadProduct: LiveData<List<Orders>>
         get() = _downloadProduct
@@ -61,6 +64,7 @@ class OrderControllerImpl(
 
 interface OrderController {
     val downloadProduct: LiveData<List<Orders>>
+    val downloadProductbyname: LiveData<List<OrdersByname>>
 
     suspend fun fetchOrders(filter:String)
     suspend fun fetchOrdersByname(filter: String,name:String)

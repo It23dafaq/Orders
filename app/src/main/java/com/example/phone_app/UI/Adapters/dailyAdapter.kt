@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.phone_app.Data.Orders
 import com.example.phone_app.R
-import kotlinx.android.synthetic.main.fragment_cart_view.view.*
-import kotlinx.android.synthetic.main.order_recycle_view.view.drinksdaily
+import kotlinx.android.synthetic.main.dailyrecyclerview.view.*
+
 
 class dailyAdapter(val phones: List<Orders>): RecyclerView.Adapter<dailyAdapter.CartViewHolder>() {
 
@@ -24,9 +24,9 @@ class dailyAdapter(val phones: List<Orders>): RecyclerView.Adapter<dailyAdapter.
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val movie = phones[position]
         //  holder.view.id = movie.id
-        holder.view.drinksdaily.text = movie.Drink
-        holder.view.pricedaily.text = movie.price.toString()
-        holder.view.quantitydaily.text = movie.posotita
+        holder.view.drinkBywaiter.text = movie.Drink
+        holder.view.PriceBywaiter.text = movie.price.toString()
+        holder.view.QuantityBywaiter.text = movie.posotita
 
 
     }

@@ -59,7 +59,7 @@
                 android:text="Your Cart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/NameWaiter"
+                android:id="@+id/NameOfWaiter"
                 android:textSize="24sp"
                 android:singleLine="false"
                 android:ellipsize="end"
@@ -68,7 +68,7 @@
                 android:text="Drinks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/drinksdaily"
+                android:id="@+id/drinkBywaiter"
                 android:layout_marginTop="20dp"
                 android:textSize="24sp"/>
 
@@ -76,7 +76,7 @@
                 android:text="Quantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/quantitydaily"
+                android:id="@+id/QuantityBywaiter"
                 android:layout_marginTop="10dp"
                 android:textSize="24sp"/>
 
@@ -84,7 +84,7 @@
                 android:text="Price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/pricedaily"
+                android:id="@+id/PriceBywaiter"
                 android:textSize="24sp"
                 android:layout_marginTop="10dp"
         />
@@ -92,7 +92,7 @@
                 android:text="Time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/Time_Order"
+                android:id="@+id/Time_Orderbywaiter"
                 android:textSize="24sp"
                 android:layout_marginTop="10dp"
         />

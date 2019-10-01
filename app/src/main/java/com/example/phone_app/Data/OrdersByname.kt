@@ -3,9 +3,8 @@ package com.example.phone_app.Data
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
-
 @Entity(tableName = "Orders")
-data class Orders (
+data class OrdersByname (
     @SerializedName("Posotita")
     var posotita: String,
     @SerializedName("UserName")
@@ -15,7 +14,7 @@ data class Orders (
     @SerializedName("Price")
     var price: Double,
     @SerializedName("Time")
-    var Time:String
-   // @SerializedName("SUM(Price)")
-    //var TotalPrice:String
+    var Time:String,
+    @SerializedName("TotalPrice")
+    var TotalPrice:Double
 )

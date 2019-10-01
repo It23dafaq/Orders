@@ -145,7 +145,7 @@ class Shop : Fragment() , KodeinAware {
      }
     fun InsertOrder(cart:MutableList<Products>,quan : String,drinkname:String,totalPayment:Double,adapter: cartAdapter){
         val SignUpUrl = "https://rectifiable-merchan.000webhostapp.com/InsertOrder.php?Posotita="+quan+
-                "&UserName="+com.example.phone_app.Data.Person.email+"&DrinkName="+drinkname+"&Price="+totalPayment+"&Comments="+comments
+                "&UserName="+com.example.phone_app.Data.Person.email+"&DrinkName="+drinkname+"&Price="+totalPayment+"&Comments="+comments+"&TotalPrice="+totalPayment
 
         val requestQ = Volley.newRequestQueue(context)
         val stringRequest = StringRequest(Request.Method.GET,SignUpUrl, Response.Listener{ response ->

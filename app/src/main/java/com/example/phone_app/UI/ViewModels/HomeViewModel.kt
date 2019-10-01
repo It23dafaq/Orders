@@ -19,6 +19,7 @@ class HomeViewModel(private val homeController: HomeController,private val Order
 
     var products = homeController.downloadProduct
     var ordersDaily = OrderController.downloadProduct
+    var orderByname = OrderController.downloadProductbyname
     fun addProduct(list: Products) {
         addcart.add(list)
     }

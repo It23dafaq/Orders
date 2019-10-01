@@ -13,14 +13,12 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.phone_app.Data.OrdersByname
 import com.example.phone_app.Data.Products
 import com.example.phone_app.Profile
 import com.example.phone_app.Profile.Companion.Id
 import com.example.phone_app.R
-import com.example.phone_app.UI.Adapters.ChooseAdapter
-import com.example.phone_app.UI.Adapters.OrderAdapter
-import com.example.phone_app.UI.Adapters.cartAdapter
-import com.example.phone_app.UI.Adapters.dailyAdapter
+import com.example.phone_app.UI.Adapters.*
 import com.example.phone_app.UI.ViewModelFactory.HomeViewModelFactory
 import com.example.phone_app.UI.ViewModels.HomeViewModel
 import kotlinx.android.synthetic.main.activity_daily_orders.*
@@ -36,6 +34,7 @@ class Admin_filterByName: Fragment() , KodeinAware {
     private val viewModelFactory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
    private var position : Int = 0
+    private var totalPrice= ""
     private var chooseDate:String = "Today"
     private var SignUpUrl:String=" "
     override fun onCreateView(
@@ -73,19 +72,21 @@ class Admin_filterByName: Fragment() , KodeinAware {
 
         editText.setOnEditorActionListener { v, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_DONE){
-                viewModel.getOrdersByname(editText.toString(),chooseDate)
+                v.text
+                viewModel.getOrdersByname(editText.text.toString(),chooseDate)
                 false
             } else {
                 true
             }
         }
 
-        viewModel.ordersDaily.observe(this, Observer {
+        viewModel.orderByname.observe(this, Observer {
 
 
-            val adapter = OrderAdapter(it)
+            val adapter = OrderAdapterByname(it,totalpricetext)
             bynamerecyvler.adapter = adapter
             bynamerecyvler.layoutManager = LinearLayoutManager(this.context)
+
         })
 
 
