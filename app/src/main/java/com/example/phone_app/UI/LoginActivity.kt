@@ -39,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
                     response ->
                 if(response.equals("The user does exist")){
                     val intent = Intent(this, MainViewActivity::class.java)
+                    Person.email=emailLogin.text.toString()
                     intent.putExtra("email", emailLogin.text)
                     startActivity(intent)
                     Toast.makeText(this@LoginActivity,response,Toast.LENGTH_SHORT).show()

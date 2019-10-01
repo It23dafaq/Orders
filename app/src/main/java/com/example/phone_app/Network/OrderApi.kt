@@ -1,6 +1,7 @@
 package com.example.phone_app.Network
 
 import com.example.phone_app.Data.Orders
+import com.example.phone_app.Data.OrdersByname
 import com.example.phone_app.Data.tables
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -31,13 +32,13 @@ interface OrderApi{
     fun getYear() : Deferred<List<Orders>>
 
     @GET("OrderBynameDateYear.php")
-    fun getYearByname(@Query("UserName") name: String) : Deferred<List<Orders>>
+    fun getYearByname(@Query("UserName") name: String) : Deferred<List<OrdersByname>>
     @GET("OrderBynameDateMonth.php")
-    fun getWeekByname(@Query("UserName")  name: String) : Deferred<List<Orders>>
+    fun getWeekByname(@Query("UserName")  name: String) : Deferred<List<OrdersByname>>
     @GET("OrderBynameDateMonth.php")
-    fun getMonthByname(@Query("UserName") name: String) : Deferred<List<Orders>>
+    fun getMonthByname(@Query("UserName") name: String) : Deferred<List<OrdersByname>>
     @GET("OrderBynameDateDay.php")
-    fun getDailyByname(@Query("UserName") name: String) : Deferred<List<Orders>>
+    fun getDailyByname(@Query("UserName") name: String) : Deferred<List<OrdersByname>>
 
     companion object {
         operator fun invoke(
