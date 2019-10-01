@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
+import androidx.core.view.inputmethod.EditorInfoCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -71,9 +72,10 @@ class Admin_filterByName: Fragment() , KodeinAware {
 
 
         editText.setOnEditorActionListener { v, actionId, event ->
-            if(actionId == EditorInfo.IME_ACTION_DONE){
+            if(actionId == EditorInfo.IME_ACTION_DONE || actionId==EditorInfo.IME_ACTION_GO ||actionId==EditorInfo.IME_ACTION_NEXT || actionId==EditorInfo.IME_ACTION_SEARCH ){
                 v.text
                 viewModel.getOrdersByname(editText.text.toString(),chooseDate)
+
                 false
             } else {
                 true
