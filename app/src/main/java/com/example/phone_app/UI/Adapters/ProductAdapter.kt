@@ -89,6 +89,8 @@ class ProductAdapter(val phones: List<Products>, val clickListener: (Products) -
               items = arrayOf("Lemonade", "Sprite", "Orange Juice", "Lemon Juice","Cola","Ice Tea", "Sour cherry")
           }else if(item_spiner.equals("Tequila")){
               items = arrayOf("Redbull", "Sprite", "Orange Juice", "Lemon Juice","Cola", "Ice Tea", "Sour cherry")
+          }else if(item_spiner.equals("Others")){
+              items = arrayOf("Σκετο", "Μετριο", "Γλυκο", "Γαλα", "Καστανη ζαχαρη", "Στεβια","Γευση φουντουκι")
           }else{
               items = arrayOf("Cola", "Sprite", "Orange Juice", "Lemon Juice", "Ice Tea", "Sour cherry")
           }

@@ -39,6 +39,9 @@ class HomeControllerIml(
         }else if (string.equals("Tequila")){
             val products = productService.getTequila().await()
             _downloadProduct.postValue(products)
+        }else if(string.equals("Others")){
+            val products = productService.getOthers().await()
+            _downloadProduct.postValue(products)
         }
     }
 }

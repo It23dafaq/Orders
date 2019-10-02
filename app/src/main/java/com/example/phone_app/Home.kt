@@ -96,7 +96,7 @@ class Home : BaseFragment(),KodeinAware {
             //cachedList.addAll(listOf(it))
         })
 
-        val drinksNames = arrayOf("Vodka", "Rum", "Gin", "Tequila", "Vodka", "Rum", "Gin", "Tequila", "Vodka", "Rum", "Gin", "Tequila")
+        val drinksNames = arrayOf("Vodka", "Rum", "Gin","Others", "Tequila", "Vodka", "Rum", "Gin", "Tequila", "Vodka", "Rum", "Gin", "Tequila")
         //drinksSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1)
         spinner.adapter = DrinksAdapter(this.requireContext(), drinksNames)
 
