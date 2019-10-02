@@ -43,6 +43,10 @@ interface ProductApi {
     @GET("ShowTequila.php")
     fun getTequila() : Deferred <List<Products>>
 
+    @GET("ShowOthers.php")
+    fun getOthers() : Deferred <List<Products>>
+
+
     companion object {
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor

@@ -137,25 +137,69 @@ class PrintAdapter(
 
         val paint = Paint()
         paint.color = Color.BLACK
-        paint.textSize = 40f
+        paint.textSize = 30f
         canvas.drawText(
-            "Orders" ,
+            "Order Table ID"+" "+id,
             leftMargin.toFloat(),
             titleBaseLine.toFloat(),
             paint
         )
+        paint.textSize = 16f
+        var distancebetweenGroup:Int=0
+        var counter=0
+        var distancebetween=0
+        cart.forEachIndexed{ index, products ->
 
-        paint.textSize = 25f
-        canvas.drawText(
-            "Table ID : "+id+System.lineSeparator()+
-                    "Drinks"+cart.toString()+System.lineSeparator()+
-                    "Price"+total,
+            if(index!=0){
+                distancebetween+=20
+            }
+                distancebetweenGroup += 30
+                canvas.drawText(
+                    "Drinks  :" + products.name, leftMargin.toFloat(),
+                    (titleBaseLine + ( distancebetweenGroup+distancebetween)).toFloat(),
+                    paint
+                )
+                canvas.drawText(
+                    "Quantity  :" + products.quantity, leftMargin.toFloat(),
+                    (titleBaseLine + (15 + distancebetweenGroup+distancebetween)).toFloat(),
+                    paint
+                )
+
+                canvas.drawText(
+                    "Price  :" + products.price, leftMargin.toFloat(),
+                    (titleBaseLine + (30 + distancebetweenGroup+distancebetween)).toFloat(),
+                    paint
+                )
+
+
+
+
+        }
+/*
+        paint.textSize = 40f
+        canvas.drawText("Drinks  :" +Drinks, leftMargin.toFloat()-10f,
+            (titleBaseLine + 35).toFloat(),
+            paint)
+        canvas.drawText("Quantity  :" +Quantity, leftMargin.toFloat()-10f,
+            (titleBaseLine + 80).toFloat(),
+            paint)
+
+        canvas.drawText("Price  :" +Price, leftMargin.toFloat()-10f,
+            (titleBaseLine + 125).toFloat(),
+            paint)
+            */
+    /*    canvas.drawText(
+                   "Drinks  :" +Drinks+ "Quantity" +Quantity +
+                           "Price   :"+ Price
+            ,
+
             leftMargin.toFloat(),
             (titleBaseLine + 35).toFloat(),
             paint
         )
+        */
 
-        if (pagenum % 2 == 0)
+      if (pagenum % 2 == 0)
             paint.color = Color.RED
         else
             paint.color = Color.GREEN
@@ -163,12 +207,13 @@ class PrintAdapter(
         val pageInfo = page.info
 
 
-        canvas.drawCircle(
+       /* canvas.drawCircle(
             (pageInfo.pageWidth / 2).toFloat(),
             (pageInfo.pageHeight / 2).toFloat(),
             150f,
             paint
         )
+        */
     }
 
 }
