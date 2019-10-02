@@ -21,12 +21,83 @@ import timber.log.Timber
 private var boolean : Boolean=true
 class TableAdapter(val phones: List<tables>,val clickListener: (tables) -> Unit,val context:Context): RecyclerView.Adapter<TableAdapter.CartViewHolder>() {
 
+    companion object{
+        var TRUE_DATABASE_RESPONSE = 1
+        var NOT_TRUE_DB_RESPONSE = 0
+    }
+    private var lastSelected : View? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        return CartViewHolder(
+        val viewHolder = CartViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.table_layout, parent, false)
         )
+
+        if (viewHolder.adapterPosition >= 0) {
+            val movie = phones[viewHolder.adapterPosition]
+            if (movie.isOkay == 0) {
+                if (movie.isOkay == 1) {
+                    if (!Profile.Id.isNullOrEmpty()) {
+                        if (movie.ID == phones[Profile.Id.toInt() - 1].ID) {
+                            viewHolder.view.tablegreenimg.setImageResource(R.drawable.red_table1)
+                            // phones[Profile.Id.toInt()-1].isOkay=1
+                        } else {
+                            viewHolder.view.tablegreenimg.setImageResource(R.drawable.green_table1)
+                        }
+                    }
+                } else if (movie.isOkay == 0) {
+                    viewHolder.view.tablegreenimg.setImageResource(R.drawable.red_table1)
+                } else {
+
+                    viewHolder.view.tablegreenimg.setImageResource(R.drawable.green_table1)
+
+                }
+            }
+        }
+        viewHolder.view.setOnClickListener {
+            if (viewHolder.adapterPosition >= 0) {
+                val movie = phones[viewHolder.adapterPosition]
+                if (movie.isOkay == 0) {
+                    if ((movie.quantity != "0")) {
+                        val builder = AlertDialog.Builder(context)
+
+                        // Set the alert dialog title
+                        builder.setTitle("Payment")
+
+                        // Display a message on alert dialog
+                        builder.setMessage("did you paid this table")
+
+                        // Set a positive button and its click listener on alert dialog
+                        builder.setPositiveButton("YES") { dialog, which ->
+                            // Do something when user press the positive button
+                            UpdateTable(movie)
+                            viewHolder.view.tablegreenimg.setImageResource(R.drawable.green_table1)
+                            movie.isOkay = 1
+                            clickListener(movie)
+                        }
+                        // viewModel.insertORDERS(quan.toString(),com.example.phone_app.Data.Person.email,drinkname,totalPayment.toDouble(),"")
+
+                        // Display a negative button on alert dialog
+                        builder.setNegativeButton("No") { dialog, which ->
+                            Timber.i("Payment canceled")
+                        }
+                        // Finally, make the alert dialog using builder and show it
+                         builder.create().show()
+                    } else {
+                        viewHolder.view.tablegreenimg.setImageResource(R.drawable.green_table1)
+                        movie.isOkay = TRUE_DATABASE_RESPONSE
+                        clickListener(movie)
+                    }
+                } else if (movie.isOkay == TRUE_DATABASE_RESPONSE) {
+                    lastSelected?.tablegreenimg?.setImageResource(R.drawable.green_table1)
+                    viewHolder.view.tablegreenimg.setImageResource(R.drawable.red_table1)
+                    lastSelected = viewHolder.view
+                    movie.isOkay = NOT_TRUE_DB_RESPONSE
+                    clickListener(movie)
+                }
+            }
+        }
+        return viewHolder
     }
 
     override fun getItemCount() = phones.size
@@ -38,72 +109,7 @@ class TableAdapter(val phones: List<tables>,val clickListener: (tables) -> Unit,
         holder.view.tableID.text = movie.ID.toString()
         holder.view.tableQuantity.text =movie.quantity
         holder.view.TableCost.text = movie.price.toString()
-        if(movie.isOkay ==1 ){
-            if(!Profile.Id.equals("")) {
-                if (movie.ID == phones[Profile.Id.toInt()-1].ID) {
-                    holder.view.tablegreenimg.setImageResource(R.drawable.red_table)
-                   // phones[Profile.Id.toInt()-1].isOkay=1
-                }else{
-                    holder.view.tablegreenimg.setImageResource(R.drawable.green_table)
-                }
-                }
-        }else if(movie.isOkay ==0 ){
-            holder.view.tablegreenimg.setImageResource(R.drawable.red_table)
-        }
-        else{
 
-            holder.view.tablegreenimg.setImageResource(R.drawable.green_table)
-
-        }
-        holder.view.tablegreenimg.setOnClickListener {
-
-            if(movie.isOkay ==0) {
-                if(!(movie.quantity.equals("0"))) {
-                    val builder = AlertDialog.Builder(context)
-
-                    // Set the alert dialog title
-                    builder.setTitle("Payment")
-
-                    // Display a message on alert dialog
-                    builder.setMessage("did you paid this table")
-
-                    // Set a positive button and its click listener on alert dialog
-                    builder.setPositiveButton("YES") { dialog, which ->
-                        // Do something when user press the positive button
-                        UpdateTable(movie)
-                        holder.view.tablegreenimg.setImageResource(R.drawable.green_table)
-                        movie.isOkay = 1
-                        clickListener(movie)
-                    }
-
-
-                    // viewModel.insertORDERS(quan.toString(),com.example.phone_app.Data.Person.email,drinkname,totalPayment.toDouble(),"")
-
-
-                    // Display a negative button on alert dialog
-                    builder.setNegativeButton("No") { dialog, which ->
-                        Timber.i("Payment canceled")
-                    }
-
-
-                    // Finally, make the alert dialog using builder
-                    val dialog: AlertDialog = builder.create()
-
-                    // Display the alert dialog on app interface
-                    dialog.show()
-                }else {
-                    holder.view.tablegreenimg.setImageResource(R.drawable.green_table)
-                    movie.isOkay = 1
-                    clickListener(movie)
-                }
-            }else if(movie.isOkay==1){
-
-                holder.view.tablegreenimg.setImageResource(R.drawable.red_table)
-                movie.isOkay=0
-                clickListener(movie)
-            }
-
-        }
         //  holder.view.textViewType.text = movie.type
         //  description
         //  holder.view.textViewRating.text = movie.rating

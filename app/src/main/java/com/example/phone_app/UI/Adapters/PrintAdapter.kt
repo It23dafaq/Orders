@@ -22,14 +22,14 @@ class PrintAdapter(
     cart: MutableList<Products>,
     id: String,
     getPrice: BigDecimal
-): PrintDocumentAdapter() {
+) : PrintDocumentAdapter() {
     private var drinks = cart
-    private var id =id
+    private var id = id
     private var pageHeight: Int = 0
     private var pageWidth: Int = 0
     private var myPdfDocument: PdfDocument? = null
     private var totalpages = 1
-    private var total=getPrice
+    private var total = getPrice
     override fun onLayout(
         oldAttributes: PrintAttributes1,
         newAttributes: PrintAttributes1,
@@ -91,7 +91,7 @@ class PrintAdapter(
                     return
                 }
                 page?.let {
-                    drawPage(it, i,drinks,id)
+                    drawPage(it, i, drinks, id)
                 }
                 myPdfDocument?.finishPage(page)
             }
@@ -125,12 +125,12 @@ class PrintAdapter(
 
     private fun drawPage(
         page: PdfDocument.Page,
-        pagenumber: Int, cart: MutableList<Products>, id: String
+        pageNumber: Int, cart: MutableList<Products>, id: String
     ) {
-        var pagenum = pagenumber
+        var pageNum = pageNumber
         val canvas = page.canvas
 
-        pagenum++ // Make sure page numbers start at 1
+        pageNum++ // Make sure page numbers start at 1
 
         val titleBaseLine = 72
         val leftMargin = 54
@@ -139,41 +139,37 @@ class PrintAdapter(
         paint.color = Color.BLACK
         paint.textSize = 30f
         canvas.drawText(
-            "Order Table ID"+" "+id,
+            "Order Table ID $id",
             leftMargin.toFloat(),
             titleBaseLine.toFloat(),
             paint
         )
         paint.textSize = 16f
-        var distancebetweenGroup:Int=0
-        var counter=0
-        var distancebetween=0
-        cart.forEachIndexed{ index, products ->
+        var distanceBetweenGroup: Int = 0
+        var counter = 0
+        var distanceBetween = 0
+        cart.forEachIndexed { index, products ->
 
-            if(index!=0){
-                distancebetween+=20
+            if (index != 0) {
+                distanceBetween += 20
             }
-                distancebetweenGroup += 30
-                canvas.drawText(
-                    "Drinks  :" + products.name, leftMargin.toFloat(),
-                    (titleBaseLine + ( distancebetweenGroup+distancebetween)).toFloat(),
-                    paint
-                )
-                canvas.drawText(
-                    "Quantity  :" + products.quantity, leftMargin.toFloat(),
-                    (titleBaseLine + (15 + distancebetweenGroup+distancebetween)).toFloat(),
-                    paint
-                )
+            distanceBetweenGroup += 30
+            canvas.drawText(
+                "Drinks  : ${products.name}", leftMargin.toFloat(),
+                (titleBaseLine + (distanceBetweenGroup + distanceBetween)).toFloat(),
+                paint
+            )
+            canvas.drawText(
+                "Quantity  : ${products.quantity}", leftMargin.toFloat(),
+                (titleBaseLine + (15 + distanceBetweenGroup + distanceBetween)).toFloat(),
+                paint
+            )
 
-                canvas.drawText(
-                    "Price  :" + products.price, leftMargin.toFloat(),
-                    (titleBaseLine + (30 + distancebetweenGroup+distancebetween)).toFloat(),
-                    paint
-                )
-
-
-
-
+            canvas.drawText(
+                "Price  :" + products.price, leftMargin.toFloat(),
+                (titleBaseLine + (30 + distanceBetweenGroup + distanceBetween)).toFloat(),
+                paint
+            )
         }
 /*
         paint.textSize = 40f
@@ -188,32 +184,31 @@ class PrintAdapter(
             (titleBaseLine + 125).toFloat(),
             paint)
             */
-    /*    canvas.drawText(
-                   "Drinks  :" +Drinks+ "Quantity" +Quantity +
-                           "Price   :"+ Price
-            ,
+        /*    canvas.drawText(
+                       "Drinks  :" +Drinks+ "Quantity" +Quantity +
+                               "Price   :"+ Price
+                ,
 
-            leftMargin.toFloat(),
-            (titleBaseLine + 35).toFloat(),
-            paint
-        )
-        */
+                leftMargin.toFloat(),
+                (titleBaseLine + 35).toFloat(),
+                paint
+            )
+            */
 
-      if (pagenum % 2 == 0)
+        if (pageNum % 2 == 0) {
             paint.color = Color.RED
-        else
+        } else {
             paint.color = Color.GREEN
+        }
 
         val pageInfo = page.info
 
-
-       /* canvas.drawCircle(
-            (pageInfo.pageWidth / 2).toFloat(),
-            (pageInfo.pageHeight / 2).toFloat(),
-            150f,
-            paint
-        )
-        */
+        /* canvas.drawCircle(
+             (pageInfo.pageWidth / 2).toFloat(),
+             (pageInfo.pageHeight / 2).toFloat(),
+             150f,
+             paint
+         )
+         */
     }
-
 }
