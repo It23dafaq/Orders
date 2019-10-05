@@ -23,10 +23,10 @@ class OrderAdapter(val phones: List<Orders>): RecyclerView.Adapter<OrderAdapter.
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val movie = phones[position]
         //  holder.view.id = movie.id
-        holder.view.NameOfWaiter.text = movie.Username
-        holder.view.PriceBywaiter.text = movie.price.toString()
-        holder.view.drinkBywaiter.text = movie.Drink
-        holder.view.QuantityBywaiter.text = movie.posotita
+        holder.view.drinknamecart.text = movie.Username
+        holder.view.dailyTotalPrice.text = movie.price.toString()
+        holder.view.quantitycart.text = movie.Drink
+        holder.view.dayliquantityCart.text = movie.posotita
         holder.view.Time_Orderbywaiter.text=movie.Time
 
 

@@ -24,9 +24,9 @@ class dailyAdapter(val phones: List<Orders>): RecyclerView.Adapter<dailyAdapter.
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val movie = phones[position]
         //  holder.view.id = movie.id
-        holder.view.drinkBywaiter.text = movie.Drink
-        holder.view.PriceBywaiter.text = movie.price.toString()
-        holder.view.QuantityBywaiter.text = movie.posotita
+
+        holder.view.dailyTotalPrice.text = movie.TotalPrice.toString()
+        holder.view.dayliquantityCart.text = movie.posotita
 
 
     }

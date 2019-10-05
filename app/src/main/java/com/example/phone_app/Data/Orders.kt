@@ -15,7 +15,9 @@ data class Orders (
     @SerializedName("Price")
     var price: Double,
     @SerializedName("Time")
-    var Time:String
+    var Time:String,
+    @SerializedName("TotalPrice")
+    var TotalPrice:Double
    // @SerializedName("SUM(Price)")
     //var TotalPrice:String
 )

@@ -24,9 +24,9 @@ class cartAdapter(val phones: List<Products>,  val clickListener: (Int) -> Unit)
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val movie = phones[position]
         //  holder.view.id = movie.id
-        holder.view.NameOfWaiter.text = movie.name
-        holder.view.PriceBywaiter.text = movie.price.toString()
-        holder.view.QuantityBywaiter.text = movie.quantity.toString()
+        holder.view.drinknamecart.text = movie.name
+        holder.view.dayliquantityCart.text = movie.price.toString()
+        holder.view.dayliquantityCart.text = movie.quantity.toString()
        holder.view.imageView4.setOnClickListener {
            clickListener (holder.adapterPosition)
            notifyItemRemoved(holder.adapterPosition)

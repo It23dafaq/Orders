@@ -35,7 +35,7 @@ class Admin_filterByName: Fragment() , KodeinAware {
     private val viewModelFactory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
    private var position : Int = 0
-    private var totalPrice= ""
+    private var totalPrice:Double= 0.0
     private var chooseDate:String = "Today"
     private var SignUpUrl:String=" "
     override fun onCreateView(
@@ -88,6 +88,10 @@ class Admin_filterByName: Fragment() , KodeinAware {
             val adapter = OrderAdapterByname(it,totalpricetext)
             bynamerecyvler.adapter = adapter
             bynamerecyvler.layoutManager = LinearLayoutManager(this.context)
+            it.forEachIndexed { index, products ->
+                totalPrice +=products.TotalPrice
+            }
+            totalpricetext.text = totalPrice.toString()
 
         })
 
